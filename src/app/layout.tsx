@@ -1,20 +1,11 @@
-import './globals.css';
-import React from 'react';
+import "../globals.css";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: 'Poligon14 — Developer',
-  description: 'Developer building interactive systems across web, games, and AI.',
+export const metadata: Metadata = {
+  title: "Temitayo Babarinde — Software Engineer",
+  description: "Computer Science student and software engineer in New York City building thoughtful products across web, AI, and interactive systems.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <div className="bg-layer fixed inset-0 -z-10" />
-        <main className="min-h-screen text-surface antialiased">
-          {children}
-        </main>
-      </body>
-    </html>
-  );
+  return <html lang="en"><body>{children}</body></html>;
 }
