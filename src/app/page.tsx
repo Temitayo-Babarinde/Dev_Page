@@ -10,6 +10,7 @@ function Arrow() { return <span aria-hidden="true">↗</span>; }
 
 export default function Page() {
   return <main>
+    <div className="grain" aria-hidden="true" />
     <nav className="nav wrap" aria-label="Primary navigation">
       <a className="monogram" href="#top" aria-label="Temitayo Babarinde, home">TB<span>.</span></a>
       <div className="nav-links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
@@ -18,12 +19,14 @@ export default function Page() {
 
     <section className="hero wrap" id="top">
       <p className="eyebrow">Software engineer · New York City</p>
+      <div className="hero-code" aria-hidden="true"><span>SELECT * FROM IDEAS</span><span>WHERE IMPACT = TRUE</span></div>
       <h1>I build digital tools<br /><span>for real people.</span></h1>
       <div className="hero-bottom">
         <p>I’m Temitayo, a Computer Science student at Hunter College creating thoughtful products across web, AI, and interactive systems.</p>
         <a className="circle-link" href="#work" aria-label="View selected work"><span>View work</span><b>↓</b></a>
       </div>
       <div className="hero-stamp" aria-hidden="true"><span>BASED IN</span><strong>NYC</strong><small>40.7128° N</small></div>
+      <div className="signal" aria-hidden="true"><i /><i /><i /><i /><i /><span>BUILD SIGNAL</span></div>
     </section>
 
     <section className="work wrap" id="work">
