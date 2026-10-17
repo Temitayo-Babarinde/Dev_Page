@@ -35,20 +35,20 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .topbar nav { display: flex; justify-self: end; gap: 26px; font-size: 9px; text-transform: uppercase; letter-spacing: .1em; }
 .topbar nav a:hover, .contact footer a:hover { color: var(--red); }
 
-.intro { width: min(1180px, calc(100% - 96px)); padding: 69px 0 33px; margin: auto; }
+.intro { width: min(1180px, calc(100% - 96px)); padding: 42px 0 17px; margin: auto; }
 .eyebrow { margin: 0; color: var(--red); font-size: 9px; text-transform: uppercase; letter-spacing: .15em; }
-.intro h1 { margin: 23px 0 24px; font-size: clamp(66px, 9vw, 124px); line-height: .9; font-weight: 500; letter-spacing: -.08em; }
+.intro h1 { margin: 16px 0 15px; font-size: clamp(64px, 7.2vw, 98px); line-height: .9; font-weight: 500; letter-spacing: -.08em; }
 .intro h1 em, .contact h2 em { color: var(--red); font-family: var(--serif); font-weight: 500; letter-spacing: -.055em; }
 .intro-bottom { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
 .intro-bottom > p { max-width: 475px; margin: 0; color: #5f5b55; font-size: 16px; line-height: 1.65; }
 .flip-hint { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .07em; }
 .flip-hint i { color: var(--red); font-size: 17px; font-style: normal; vertical-align: -2px; margin-right: 6px; }
 
-.table { min-height: 580px; position: relative; overflow: hidden; background: #e6e1d8; border-top: 1px solid #d4cfc4; border-bottom: 1px solid #d4cfc4; }
+.table { min-height: 515px; position: relative; overflow: hidden; background: #e6e1d8; border-top: 1px solid #d4cfc4; border-bottom: 1px solid #d4cfc4; }
 .table::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .45; background-image: linear-gradient(90deg, transparent calc(50% - .5px), rgba(83,77,69,.09) 50%, transparent calc(50% + .5px)); }
 .table-caption { position: absolute; z-index: 20; top: 22px; left: max(48px, calc((100% - 1440px) / 2)); right: max(48px, calc((100% - 1440px) / 2)); display: flex; justify-content: space-between; color: #817b72; font-size: 8px; letter-spacing: .13em; }
-.fan { height: 488px; max-width: 1500px; position: relative; margin: 33px auto 0; perspective: 1600px; }
-.playing-card { position: absolute; top: 46px; left: 50%; width: 246px; height: 362px; margin-left: -123px; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
+.fan { height: 445px; max-width: 1500px; position: relative; margin: 12px auto 0; perspective: 1600px; }
+.playing-card { position: absolute; top: 20px; left: 50%; width: 246px; height: 362px; margin-left: -123px; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
 .playing-card:nth-child(1) { --fan-x: -420px; --fan-angle: -28deg; --fan-y: 20px; z-index: 1; }
 .playing-card:nth-child(2) { --fan-x: -280px; --fan-angle: -19deg; --fan-y: 5px; z-index: 2; }
 .playing-card:nth-child(3) { --fan-x: -140px; --fan-angle: -10deg; --fan-y: -3px; z-index: 3; }
@@ -129,14 +129,14 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
   .topbar { width: calc(100% - 36px); height: 68px; grid-template-columns: auto 1fr; }
   .topbar > p { justify-self: center; font-size: 8px; }
   .topbar nav { display: none; }
-  .intro { width: calc(100% - 36px); padding-top: 52px; }
-  .intro h1 { margin-top: 22px; font-size: clamp(55px, 14vw, 82px); }
+  .intro { width: calc(100% - 36px); padding-top: 32px; padding-bottom: 14px; }
+  .intro h1 { margin-top: 16px; font-size: clamp(55px, 13vw, 76px); }
   .intro-bottom { align-items: start; flex-direction: column; }
   .intro-bottom > p { max-width: 390px; font-size: 14px; }
   .flip-hint { margin-top: 1px; }
-  .table { min-height: 520px; }
+  .table { min-height: 440px; }
   .table-caption { left: 18px; right: 18px; }
-  .fan { height: 465px; display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden; margin-top: 31px; padding: 47px max(18px, calc((100vw - 214px) / 2)) 22px; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
+  .fan { height: 395px; display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden; margin-top: 10px; padding: 31px max(18px, calc((100vw - 214px) / 2)) 22px; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
   .playing-card { position: relative; top: auto; left: auto; flex: 0 0 214px; margin-left: -120px; transform: rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; }
   .playing-card:first-child { margin-left: 0; }
   .playing-card:nth-child(1) { --fan-angle: -13deg; --fan-y: 17px; }
