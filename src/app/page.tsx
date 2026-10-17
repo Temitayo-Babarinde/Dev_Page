@@ -1,64 +1,126 @@
 const projects = [
-  { number: "01", title: "HLPR", type: "Student platform · 2026", description: "A CUNY-focused learning network where students can find course communities, share notes, and get help from people taking the same classes.", stack: ["Next.js", "Supabase", "Auth", "PostgreSQL"], href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1", status: "In development" },
-  { number: "02", title: "AI Startup Tracker", type: "Data product · 2026", description: "A vertical AI discovery engine that collects startup activity, summarizes meaningful updates, and turns a noisy market into a useful daily brief.", stack: ["Python", "Node.js", "LLMs", "Supabase"], href: "https://github.com/Temitayo-Babarinde", status: "Building" },
-  { number: "03", title: "Solar Time", type: "Interactive tool · 2026", description: "A location-aware sun tracker that visualizes sunrise, sunset, daylight, seasonal movement, and daylight-saving changes across the year.", stack: ["Python", "JavaScript", "Time zones", "Data viz"], href: "https://github.com/Temitayo-Babarinde", status: "Complete" },
-  { number: "04", title: "Nightmare FPS", type: "Game systems · 2025", description: "A surreal first-person game built around momentum, toxic zones, environmental storytelling, and enemies that distort how the player moves.", stack: ["Godot", "GDScript", "3D systems", "Game design"], href: "https://github.com/Temitayo-Babarinde", status: "Prototype" },
+  {
+    number: "01",
+    name: "HLPR",
+    category: "Student collaboration · Hunter College",
+    description:
+      "A private class workspace for Hunter students: find a course section, talk with classmates, share tasks, and keep a living syllabus in one place.",
+    details: ["Next.js", "Supabase", "Postgres", "Row-level security"],
+    href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1",
+    note: "Built for the campus I know",
+  },
+  {
+    number: "02",
+    name: "Strategy Lab",
+    category: "AI safety demo · Daytona HackSprint",
+    description:
+      "A research prototype that runs a generated trading candidate in an isolated Daytona sandbox, checks for lookahead leakage, and traces the bounded repair loop.",
+    details: ["Python", "Daytona", "Arize / Phoenix", "Amazon Bedrock"],
+    href: "https://github.com/Temitayo-Babarinde/strategy-lab",
+    note: "Synthetic data · not financial advice",
+  },
 ];
 
-const skills = ["TypeScript", "JavaScript", "Python", "Go", "React", "Next.js", "Node.js", "Supabase", "PostgreSQL", "Godot"];
-function Arrow() { return <span aria-hidden="true">↗</span>; }
+const tools = ["Python", "C++", "JavaScript", "Go", "HTML / CSS"];
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
 
 export default function Page() {
-  return <main>
-    <div className="grain" aria-hidden="true" />
-    <nav className="nav wrap" aria-label="Primary navigation">
-      <a className="monogram" href="#top" aria-label="Temitayo Babarinde, home">TB<span>.</span></a>
-      <div className="nav-links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
-      <a className="availability" href="#contact"><i /> Open to opportunities</a>
-    </nav>
+  return (
+    <main id="top">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <header className="site-header page-grid">
+        <a className="wordmark" href="#top" aria-label="Temitayo Babarinde home">TB<span>.</span></a>
+        <p className="header-location">New York, NY <span>·</span> Hunter College</p>
+        <nav aria-label="Main navigation">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-    <section className="hero wrap" id="top">
-      <p className="eyebrow">Software engineer · New York City</p>
-      <div className="hero-code" aria-hidden="true"><span>SELECT * FROM IDEAS</span><span>WHERE IMPACT = TRUE</span></div>
-      <h1>I build digital tools<br /><span>for real people.</span></h1>
-      <div className="hero-bottom">
-        <p>I’m Temitayo, a Computer Science student at Hunter College creating thoughtful products across web, AI, and interactive systems.</p>
-        <a className="circle-link" href="#work" aria-label="View selected work"><span>View work</span><b>↓</b></a>
+      <div id="main-content">
+        <section className="hero page-grid" aria-labelledby="hero-title">
+          <p className="eyebrow hero-label">Computer Science + Mathematics</p>
+          <div className="hero-copy">
+            <h1 id="hero-title">I make software<br />that <em>does useful things.</em></h1>
+            <div className="hero-foot">
+              <p>I’m Temitayo Babarinde, a student developer at Hunter College. I build tools for learning, thoughtful AI experiments, and the people who use them.</p>
+              <a className="text-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <p className="hero-index" aria-hidden="true">PORTFOLIO<br />2026 — NYC</p>
+        </section>
+
+        <section className="work section-grid" id="work" aria-labelledby="work-title">
+          <div className="section-marker"><span>01</span><span>Selected work</span></div>
+          <div className="section-content">
+            <div className="section-intro">
+              <h2 id="work-title">Built with a reason.</h2>
+              <p>Two projects that show how I think: start with a real need, make the system work, and be clear about its limits.</p>
+            </div>
+            <div className="project-list">
+              {projects.map((project) => (
+                <article className="project" key={project.number}>
+                  <p className="project-number">{project.number}</p>
+                  <div className="project-body">
+                    <div className="project-heading">
+                      <div>
+                        <p className="project-category">{project.category}</p>
+                        <h3>{project.name}</h3>
+                      </div>
+                      <a className="project-link" href={project.href} target="_blank" rel="noreferrer" aria-label={`View ${project.name} on GitHub`}><Arrow /></a>
+                    </div>
+                    <p className="project-description">{project.description}</p>
+                    <div className="project-meta">
+                      <ul aria-label={`${project.name} technologies`}>
+                        {project.details.map((detail) => <li key={detail}>{detail}</li>)}
+                      </ul>
+                      <p>{project.note}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="about section-grid" id="about" aria-labelledby="about-title">
+          <div className="section-marker"><span>02</span><span>About</span></div>
+          <div className="section-content about-content">
+            <h2 id="about-title">A student of systems<br />and the people inside them.</h2>
+            <div className="about-columns">
+              <p>I study Computer Science and Mathematics at Hunter College. I like the point where careful engineering meets a problem people recognize, whether that means helping classmates coordinate or making an AI system explain what it actually checked.</p>
+              <div className="tool-list">
+                <p className="eyebrow">Tools I’m learning and using</p>
+                <ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="contact section-grid" id="contact" aria-labelledby="contact-title">
+          <div className="section-marker"><span>03</span><span>Contact</span></div>
+          <div className="section-content contact-content">
+            <p className="eyebrow">For good questions and good work</p>
+            <h2 id="contact-title">Let’s make<br /><em>something useful.</em></h2>
+            <div className="contact-bottom">
+              <p>Interested in software internships, hackathons, or building with thoughtful people.</p>
+              <div className="contact-links">
+                <a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub <Arrow /></a>
+                <a href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      <div className="hero-stamp" aria-hidden="true"><span>BASED IN</span><strong>NYC</strong><small>40.7128° N</small></div>
-      <div className="signal" aria-hidden="true"><i /><i /><i /><i /><i /><span>BUILD SIGNAL</span></div>
-    </section>
 
-    <section className="work wrap" id="work">
-      <header className="section-head"><div><p className="eyebrow">01 / Selected work</p><h2>Projects with purpose.</h2></div><p>A selection of products, experiments, and systems I’ve built while learning in public.</p></header>
-      <div className="project-list">{projects.map((project) =>
-        <a className="project" href={project.href} key={project.title} target={project.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-          <span className="project-number">{project.number}</span>
-          <div className="project-main"><p>{project.type}</p><h3>{project.title}</h3><span className="project-status">{project.status}</span></div>
-          <p className="project-description">{project.description}</p>
-          <div className="project-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
-          <span className="project-arrow"><Arrow /></span>
-        </a>)}</div>
-    </section>
-
-    <section className="about" id="about"><div className="wrap about-grid">
-      <p className="eyebrow">02 / About</p>
-      <div className="about-copy"><h2>Curious by default.<br /><em>Useful by design.</em></h2><div className="about-columns">
-        <p>I’m a freshman studying Computer Science at Hunter College. I’m interested in backend systems, AI products, and the small design decisions that make software feel obvious.</p>
-        <p>I grew up in Nigeria and now build from Queens, New York. That path shaped how I think: stay resourceful, learn fast, and make technology work for communities that are usually overlooked.</p>
-      </div></div>
-      <aside className="currently"><span>Currently</span><p>Studying at Hunter College</p><p>Building HLPR</p><p>Looking for 2027 opportunities</p></aside>
-    </div></section>
-
-    <section className="toolkit wrap"><div className="section-head compact"><div><p className="eyebrow">03 / Toolkit</p><h2>What I work with.</h2></div></div>
-      <div className="skills" aria-label="Technical skills">{skills.map((skill, index) => <span key={skill}><small>{String(index + 1).padStart(2, "0")}</small>{skill}</span>)}</div>
-    </section>
-
-    <section className="contact" id="contact"><div className="wrap contact-inner">
-      <p className="eyebrow">04 / Let’s talk</p><h2>Have an idea?<br /><em>Let’s build it.</em></h2>
-      <p className="contact-copy">I’m looking for software engineering internships, ambitious collaborators, and projects worth caring about.</p>
-      <div className="contact-links"><a href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub <Arrow /></a></div>
-      <footer><span>© {new Date().getFullYear()} Temitayo Babarinde</span><a href="#top">Back to top ↑</a></footer>
-    </div></section>
-  </main>;
+      <footer className="site-footer page-grid">
+        <p>© {new Date().getFullYear()} Temitayo Babarinde</p>
+        <p>Made in New York <span>·</span> <a href="#top">Back to top ↑</a></p>
+      </footer>
+    </main>
+  );
 }
