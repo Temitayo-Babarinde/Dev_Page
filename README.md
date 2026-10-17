@@ -1,27 +1,32 @@
-# Poligon14 — Developer Landing (Scaffold)
+# Temitayo Babarinde — Portfolio
 
-This is a minimal Next.js + TypeScript scaffold for a developer-first landing page:
-- Next.js (App Router)
-- Tailwind CSS
-- Framer Motion
-- Developer-first sections: Hero, Capabilities, Selected Work, Tech & Tools, Now/Next
+A personal portfolio for Temitayo Babarinde, a Computer Science and Mathematics student at Hunter College. The page highlights two current projects, the work behind them, and ways to get in touch.
 
-Quick start:
-1. Install dependencies:
-   - npm install
-2. Run dev:
-   - npm run dev
-3. Build:
-   - npm run build
-4. Lint:
-   - npm run lint
+## Stack
 
-To publish:
-- Create a GitHub repo and push, or use `gh repo create` to create + push.
+- Next.js 13 App Router
+- React 18 and TypeScript
+- Tailwind CSS (base utilities)
 
-Files included mirror a system-first, motion-aware layout with data-driven components.
+## Run locally
 
-Next steps (recommended)
-- Add screenshots (next/image) for projects
-- Centralize motion constants if you want global control
-- Add accessibility checks and meta/social images
+```sh
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Build
+
+```sh
+npm run build
+```
+
+## Content and design
+
+- `src/app/page.tsx` contains the portfolio sections and project descriptions.
+- `src/globals.css` defines the responsive editorial layout, typography, colors, and interaction states.
+- `src/app/layout.tsx` contains the page metadata.
+
+Project summaries link to their source repositories. Strategy Lab uses synthetic data for a repeatable safety demo; its results are not evidence of trading performance. HLPR is a private class workspace intended for Hunter College students.
