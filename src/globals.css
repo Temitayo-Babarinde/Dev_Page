@@ -48,7 +48,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .card-table::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .45; background-image: linear-gradient(90deg, transparent calc(50% - .5px), rgba(83,77,69,.09) 50%, transparent calc(50% + .5px)); }
 .table-caption { position: absolute; z-index: 20; top: 22px; left: max(48px, calc((100% - 1440px) / 2)); right: max(48px, calc((100% - 1440px) / 2)); display: flex; justify-content: space-between; color: #817b72; font-size: 8px; letter-spacing: .13em; }
 .fan { height: 445px; max-width: 1500px; position: relative; margin: 12px auto 0; perspective: 1600px; }
-.playing-card { position: absolute; top: 20px; left: 50%; width: 246px; height: 362px; margin-left: -123px; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
+.playing-card { position: absolute; top: 20px; left: 50%; width: 246px; height: 362px; margin-left: 0; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
 .playing-card:nth-child(1) { --fan-x: -420px; --fan-angle: -28deg; --fan-y: 20px; z-index: 1; }
 .playing-card:nth-child(2) { --fan-x: -280px; --fan-angle: -19deg; --fan-y: 5px; z-index: 2; }
 .playing-card:nth-child(3) { --fan-x: -140px; --fan-angle: -10deg; --fan-y: -3px; z-index: 3; }
@@ -73,8 +73,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .card-front { display: block; padding: 16px 17px 14px; background: var(--card); border: 1px solid #c8c1b6; color: var(--ink); transform: rotateY(180deg); visibility: hidden; }
 .playing-card[open] .card-back { transform: rotateY(-180deg); visibility: hidden; }
 .playing-card[open] .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
-.playing-card:not([open]):hover .card-back, .playing-card:not([open]):focus-within .card-back { transform: rotateY(-180deg); visibility: hidden; transition-delay: 0s, .4s; }
-.playing-card:not([open]):hover .card-front, .playing-card:not([open]):focus-within .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
+.playing-card:not([open]):hover .card-back { transform: rotateY(-180deg); visibility: hidden; transition-delay: 0s, .4s; }
+.playing-card:not([open]):hover .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
 .suit-hearts .card-corner, .suit-hearts .card-foot span:nth-child(2), .suit-diamonds .card-corner, .suit-diamonds .card-foot span:nth-child(2), .suit-hearts .back-index, .suit-diamonds .back-index { color: var(--red); }
 .card-corner { display: flex; gap: 3px; align-items: baseline; width: fit-content; flex-direction: column; color: var(--black-suit); font-family: var(--serif); font-size: 15px; line-height: .9; }
 .card-corner b { font-size: 19px; font-weight: 500; }
@@ -87,14 +87,18 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .card-front li { position: relative; padding-left: 11px; color: #41413e; font-size: 9px; line-height: 1.42; }
 .card-front li::before { content: ""; position: absolute; top: 5px; left: 0; width: 4px; height: 4px; background: var(--red); transform: rotate(45deg); }
 .card-link { display: inline-flex; gap: 9px; align-items: center; margin-top: 12px; padding-bottom: 3px; border-bottom: 1px solid var(--red); color: var(--red); font-family: var(--mono); font-size: 8px; }
+.card-close { position: absolute; z-index: 3; top: 12px; right: 12px; width: 25px; height: 25px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--red); font-size: 16px; line-height: 1; cursor: pointer; }
+.card-close:hover, .card-close:focus-visible { background: var(--ink); border-color: var(--ink); color: white; }
 .identity-card .card-front { background: #f8f5ec; border: 1px solid var(--red); }
 .identity-card .card-front::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(164,52,58,.38); pointer-events: none; }
-.identity-card .card-copy { padding: 30px 10px 0; }
-.identity-card .card-front h2 { font-family: var(--serif); font-size: 30px; line-height: 1.08; }
+.identity-card .card-copy { padding: 22px 10px 0; }
+.identity-card .card-front h2 { margin-bottom: 8px; font-family: var(--serif); font-size: 30px; line-height: 1.08; }
 .identity-card .card-kicker { min-height: unset; margin-bottom: 12px; }
-.identity-mark { margin: 0 0 15px; color: var(--red); font-size: 7px; letter-spacing: .16em; }
+.identity-mark { margin: 0 0 7px; color: var(--red); font-size: 7px; letter-spacing: .16em; }
 .identity-mark span { display: block; margin-top: 3px; color: #6f6960; font-size: 6px; }
-.identity-card .card-description { max-width: 170px; }
+.identity-card .card-description { max-width: 170px; margin-bottom: 7px; }
+.identity-card .card-front ul { gap: 4px; padding-top: 7px; }
+.identity-card .card-link { margin-top: 7px; }
 .identity-card .card-front li { font-size: 8px; }
 .card-foot { position: absolute; right: 17px; bottom: 12px; left: 17px; display: flex; align-items: center; justify-content: space-between; color: #878076; font-size: 7px; letter-spacing: .08em; }
 .card-foot span:nth-child(1) { font-weight: 500; }
@@ -111,14 +115,17 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .contact-links a:hover span { transform: translate(2px,-2px); }
 .contact footer { min-height: 62px; display: flex; justify-content: space-between; align-items: end; margin-top: 65px; padding-top: 19px; border-top: 1px solid var(--line); color: var(--muted); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
 
-@media (max-width: 1000px) {
-  .playing-card { width: 214px; height: 330px; margin-left: -107px; }
-  .playing-card:nth-child(1) { --fan-x: -340px; }
-  .playing-card:nth-child(2) { --fan-x: -226px; }
-  .playing-card:nth-child(3) { --fan-x: -113px; }
-  .playing-card:nth-child(5) { --fan-x: 113px; }
-  .playing-card:nth-child(6) { --fan-x: 226px; }
-  .playing-card:nth-child(7) { --fan-x: 340px; }
+@media (max-width: 1200px) {
+  .fan { height: 445px; display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden; margin-top: 12px; padding: 54px max(18px, calc(50vw - 389px)) 22px; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
+  .playing-card { position: relative; top: auto; left: auto; width: 214px; height: 330px; flex: 0 0 214px; margin-left: -120px; transform: rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; }
+  .playing-card:first-child { margin-left: 0; }
+  .playing-card:nth-child(1) { --fan-angle: -13deg; --fan-y: 17px; }
+  .playing-card:nth-child(2) { --fan-angle: -9deg; --fan-y: 7px; }
+  .playing-card:nth-child(3) { --fan-angle: -4deg; --fan-y: 0px; }
+  .playing-card:nth-child(4) { --fan-angle: 0deg; --fan-y: -7px; }
+  .playing-card:nth-child(5) { --fan-angle: 5deg; --fan-y: 0px; }
+  .playing-card:nth-child(6) { --fan-angle: 9deg; --fan-y: 7px; }
+  .playing-card:nth-child(7) { --fan-angle: 13deg; --fan-y: 17px; }
   .card-front { padding-inline: 13px; }
   .card-copy { padding-top: 7px; }
   .card-front h2 { font-size: 22px; }
@@ -136,7 +143,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
   .flip-hint { margin-top: 1px; }
   .card-table { min-height: 440px; }
   .table-caption { left: 18px; right: 18px; }
-  .fan { height: 395px; display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden; margin-top: 10px; padding: 31px max(18px, calc((100vw - 214px) / 2)) 22px; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
+  .fan { height: 395px; margin-top: 10px; padding: 31px max(18px, calc(50vw - 389px)) 22px; }
   .playing-card { position: relative; top: auto; left: auto; flex: 0 0 214px; margin-left: -120px; transform: rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; }
   .playing-card:first-child { margin-left: 0; }
   .playing-card:nth-child(1) { --fan-angle: -13deg; --fan-y: 17px; }
