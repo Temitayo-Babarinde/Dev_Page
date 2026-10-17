@@ -88,7 +88,7 @@ const cards: CardInfo[] = [
 const symbols = { diamonds: "♦", spades: "♠", hearts: "♥", clubs: "♣" };
 
 export default function Page() {
-  const [openCards, setOpenCards] = useState<Set<number>>(() => new Set([3]));
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
     <main id="top">
@@ -121,28 +121,24 @@ export default function Page() {
         </div>
         <div className="fan">
           {cards.map((card, index) => (
-            <details
-              className={`playing-card suit-${card.suit}${card.identity ? " identity-card" : ""}`}
+            <article
+              className={`playing-card suit-${card.suit}${card.identity ? " identity-card is-open" : activeCard === index ? " is-open" : ""}`}
               key={`${card.rank}-${card.title}`}
-              open={openCards.has(index)}
-              onToggle={(event) => {
-                const isOpen = event.currentTarget.open;
-                setOpenCards((current) => {
-                  if (current.has(index) === isOpen) return current;
-                  const next = new Set(current);
-                  if (isOpen) next.add(index);
-                  else next.delete(index);
-                  return next;
-                });
-              }}
               style={{ "--card-index": index } as React.CSSProperties}
             >
-              <summary className="card-back" aria-label={`Reveal ${card.title}`}>
+              <button
+                className="card-back"
+                type="button"
+                aria-label={`${activeCard === index ? "Turn back" : "Reveal"} ${card.title}`}
+                aria-expanded={card.identity || activeCard === index}
+                aria-controls={`card-front-${index}`}
+                onClick={() => setActiveCard(activeCard === index ? null : index)}
+              >
                 <span className="back-index">{card.rank}{symbols[card.suit]}</span>
                 <span className="back-ornament" aria-hidden="true"><i>{symbols[card.suit]}</i></span>
                 <span className="back-caption">TEMITAYO · 2026</span>
-              </summary>
-              <div className="card-front">
+              </button>
+              <div className="card-front" id={`card-front-${index}`}>
                 <div className="card-corner" aria-hidden="true"><b>{card.rank}</b><span>{symbols[card.suit]}</span></div>
                 <div className="card-copy">
                   <p className="card-kicker">{card.kicker}</p>
@@ -158,13 +154,8 @@ export default function Page() {
                     type="button"
                     aria-label={`Turn ${card.title} back over`}
                     onClick={(event) => {
-                      setOpenCards((current) => {
-                        if (!current.has(index)) return current;
-                        const next = new Set(current);
-                        next.delete(index);
-                        return next;
-                      });
-                      event.currentTarget.closest("details")?.querySelector("summary")?.focus();
+                      setActiveCard(null);
+                      event.currentTarget.closest(".playing-card")?.querySelector<HTMLButtonElement>(".card-back")?.focus();
                     }}
                   >
                     ↶
@@ -172,7 +163,7 @@ export default function Page() {
                 )}
                 <div className="card-foot"><span>TB</span><span>{symbols[card.suit]}</span><span>{String(index + 1).padStart(2, "0")} / 07</span></div>
               </div>
-            </details>
+            </article>
           ))}
         </div>
         <p className="fan-note">The Jack stays face up. The rest are yours to turn over.</p>
