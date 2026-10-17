@@ -1,64 +1,157 @@
-const projects = [
-  { number: "01", title: "HLPR", type: "Student platform · 2026", description: "A CUNY-focused learning network where students can find course communities, share notes, and get help from people taking the same classes.", stack: ["Next.js", "Supabase", "Auth", "PostgreSQL"], href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1", status: "In development" },
-  { number: "02", title: "AI Startup Tracker", type: "Data product · 2026", description: "A vertical AI discovery engine that collects startup activity, summarizes meaningful updates, and turns a noisy market into a useful daily brief.", stack: ["Python", "Node.js", "LLMs", "Supabase"], href: "https://github.com/Temitayo-Babarinde", status: "Building" },
-  { number: "03", title: "Solar Time", type: "Interactive tool · 2026", description: "A location-aware sun tracker that visualizes sunrise, sunset, daylight, seasonal movement, and daylight-saving changes across the year.", stack: ["Python", "JavaScript", "Time zones", "Data viz"], href: "https://github.com/Temitayo-Babarinde", status: "Complete" },
-  { number: "04", title: "Nightmare FPS", type: "Game systems · 2025", description: "A surreal first-person game built around momentum, toxic zones, environmental storytelling, and enemies that distort how the player moves.", stack: ["Godot", "GDScript", "3D systems", "Game design"], href: "https://github.com/Temitayo-Babarinde", status: "Prototype" },
+type CardInfo = {
+  rank: string;
+  suit: "diamonds" | "spades" | "hearts" | "clubs";
+  title: string;
+  kicker: string;
+  description: string;
+  lines: string[];
+  link?: { label: string; href: string };
+  identity?: boolean;
+};
+
+const cards: CardInfo[] = [
+  {
+    rank: "Q",
+    suit: "spades",
+    title: "More experiments",
+    kicker: "Selected projects",
+    description: "A few other ideas I’ve explored across data, tools, and games.",
+    lines: [
+      "AI Startup Tracker — startup activity into a focused daily brief.",
+      "Solar Time — daylight, sunrise, and seasonal change over time.",
+      "Nightmare FPS — momentum, toxic zones, and environmental storytelling.",
+    ],
+    link: { label: "Browse my GitHub", href: "https://github.com/Temitayo-Babarinde" },
+  },
+  {
+    rank: "A",
+    suit: "diamonds",
+    title: "Skills & tools",
+    kicker: "What I work with",
+    description: "A growing toolkit for building across software, data, and interactive experiences.",
+    lines: [
+      "Languages · Python, C++, JavaScript, Go, HTML, CSS, TypeScript",
+      "Web · React, Next.js, Node.js",
+      "Data · Supabase, PostgreSQL",
+      "Creative · Godot, game systems, visual design",
+    ],
+  },
+  {
+    rank: "K",
+    suit: "spades",
+    title: "HLPR",
+    kicker: "Student collaboration · Hunter College",
+    description: "A private class workspace for Hunter students to find their course section, talk with classmates, share tasks, and keep a living syllabus together.",
+    lines: ["Next.js 16 + React 19", "Supabase Auth + Postgres", "Realtime discussions · shared tasks · class syllabus"],
+    link: { label: "Open the HLPR repo", href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1" },
+  },
+  {
+    rank: "J",
+    suit: "clubs",
+    title: "Temitayo Babarinde",
+    kicker: "Jack of all trades",
+    description: "Student developer, curious builder, and lifelong learner.",
+    lines: ["Freshman · Hunter College", "Computer Science + Mathematics", "Queens, New York · grew up in Nigeria", "Looking for 2027 opportunities"],
+    link: { label: "Say hello on LinkedIn", href: "https://www.linkedin.com/in/temitayo-babarinde-4198202a2" },
+    identity: true,
+  },
+  {
+    rank: "10",
+    suit: "spades",
+    title: "Strategy Lab",
+    kicker: "AI safety demo · Daytona HackSprint",
+    description: "A research prototype that runs a generated trading candidate in an isolated Daytona sandbox, checks for lookahead leakage, and traces a bounded repair loop.",
+    lines: ["Python · Daytona · Arize / Phoenix", "Amazon Bedrock repair path", "Synthetic data · not evidence of trading performance"],
+    link: { label: "Open the Strategy Lab repo", href: "https://github.com/Temitayo-Babarinde/strategy-lab" },
+  },
+  {
+    rank: "K",
+    suit: "hearts",
+    title: "About me",
+    kicker: "Learning in public",
+    description: "I’m interested in backend systems, AI products, and small design decisions that make software easier to use.",
+    lines: ["Studying Computer Science + Mathematics", "Building HLPR for the Hunter community", "Interested in web, AI, and interactive systems"],
+  },
+  {
+    rank: "8",
+    suit: "clubs",
+    title: "Daytona HackSprint",
+    kicker: "Hackathon · New York City · 2026",
+    description: "A one-day build sprint at the frontier of AI. I participated solo and built Strategy Lab around the Daytona and Arize tools.",
+    lines: ["Sponsor tools · Daytona + Arize", "Project · eval-gated backtest demo", "Also explored AWS Bedrock for bounded repairs"],
+    link: { label: "See the project", href: "https://github.com/Temitayo-Babarinde/strategy-lab" },
+  },
 ];
 
-const skills = ["TypeScript", "JavaScript", "Python", "Go", "React", "Next.js", "Node.js", "Supabase", "PostgreSQL", "Godot"];
-function Arrow() { return <span aria-hidden="true">↗</span>; }
+const symbols = { diamonds: "♦", spades: "♠", hearts: "♥", clubs: "♣" };
 
 export default function Page() {
-  return <main>
-    <div className="grain" aria-hidden="true" />
-    <nav className="nav wrap" aria-label="Primary navigation">
-      <a className="monogram" href="#top" aria-label="Temitayo Babarinde, home">TB<span>.</span></a>
-      <div className="nav-links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
-      <a className="availability" href="#contact"><i /> Open to opportunities</a>
-    </nav>
+  return (
+    <main id="top">
+      <a className="skip-link" href="#hand">Skip to the cards</a>
+      <header className="topbar">
+        <a className="monogram" href="#top" aria-label="Temitayo Babarinde home">TB<span>.</span></a>
+        <p>New York <span>·</span> Hunter College</p>
+        <nav aria-label="Main navigation">
+          <a href="#hand">The hand</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-    <section className="hero wrap" id="top">
-      <p className="eyebrow">Software engineer · New York City</p>
-      <div className="hero-code" aria-hidden="true"><span>SELECT * FROM IDEAS</span><span>WHERE IMPACT = TRUE</span></div>
-      <h1>I build digital tools<br /><span>for real people.</span></h1>
-      <div className="hero-bottom">
-        <p>I’m Temitayo, a Computer Science student at Hunter College creating thoughtful products across web, AI, and interactive systems.</p>
-        <a className="circle-link" href="#work" aria-label="View selected work"><span>View work</span><b>↓</b></a>
-      </div>
-      <div className="hero-stamp" aria-hidden="true"><span>BASED IN</span><strong>NYC</strong><small>40.7128° N</small></div>
-      <div className="signal" aria-hidden="true"><i /><i /><i /><i /><i /><span>BUILD SIGNAL</span></div>
-    </section>
+      <section className="intro" aria-labelledby="page-title">
+        <p className="eyebrow">A developer’s deck · 2026</p>
+        <h1 id="page-title">Jack of <em>all trades.</em></h1>
+        <div className="intro-bottom">
+          <p>Pick a card. My skills, projects, and the story behind them are in the hand.</p>
+          <span className="flip-hint"><i aria-hidden="true">↻</i> Hover or tap to reveal</span>
+        </div>
+      </section>
 
-    <section className="work wrap" id="work">
-      <header className="section-head"><div><p className="eyebrow">01 / Selected work</p><h2>Projects with purpose.</h2></div><p>A selection of products, experiments, and systems I’ve built while learning in public.</p></header>
-      <div className="project-list">{projects.map((project) =>
-        <a className="project" href={project.href} key={project.title} target={project.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-          <span className="project-number">{project.number}</span>
-          <div className="project-main"><p>{project.type}</p><h3>{project.title}</h3><span className="project-status">{project.status}</span></div>
-          <p className="project-description">{project.description}</p>
-          <div className="project-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
-          <span className="project-arrow"><Arrow /></span>
-        </a>)}</div>
-    </section>
+      <section className="table" id="hand" aria-label="A fan of playing cards. Hover, focus, or tap a card to reveal its details.">
+        <div className="table-caption"><span>THE DECK</span><span>01 — 07</span></div>
+        <div className="fan">
+          {cards.map((card, index) => (
+            <details
+              className={`playing-card suit-${card.suit}${card.identity ? " identity-card" : ""}`}
+              key={`${card.rank}-${card.title}`}
+              open={card.identity}
+              style={{ "--card-index": index } as React.CSSProperties}
+            >
+              <summary className="card-back" aria-label={`Reveal ${card.title}`}>
+                <span className="back-index">{card.rank}{symbols[card.suit]}</span>
+                <span className="back-ornament" aria-hidden="true"><i>{symbols[card.suit]}</i></span>
+                <span className="back-caption">TEMITAYO · 2026</span>
+              </summary>
+              <div className="card-front">
+                <div className="card-corner" aria-hidden="true"><b>{card.rank}</b><span>{symbols[card.suit]}</span></div>
+                <div className="card-copy">
+                  <p className="card-kicker">{card.kicker}</p>
+                  <h2>{card.title}</h2>
+                  {card.identity && <p className="identity-mark">JACK <span>OF ALL TRADES</span></p>}
+                  <p className="card-description">{card.description}</p>
+                  <ul>{card.lines.map((line) => <li key={line}>{line}</li>)}</ul>
+                  {card.link && <a className="card-link" href={card.link.href} target="_blank" rel="noreferrer">{card.link.label}<span aria-hidden="true">↗</span></a>}
+                </div>
+                <div className="card-foot"><span>TB</span><span>{symbols[card.suit]}</span><span>{String(index + 1).padStart(2, "0")} / 07</span></div>
+              </div>
+            </details>
+          ))}
+        </div>
+        <p className="fan-note">The Jack stays face up. The rest are yours to turn over.</p>
+      </section>
 
-    <section className="about" id="about"><div className="wrap about-grid">
-      <p className="eyebrow">02 / About</p>
-      <div className="about-copy"><h2>Curious by default.<br /><em>Useful by design.</em></h2><div className="about-columns">
-        <p>I’m a freshman studying Computer Science at Hunter College. I’m interested in backend systems, AI products, and the small design decisions that make software feel obvious.</p>
-        <p>I grew up in Nigeria and now build from Queens, New York. That path shaped how I think: stay resourceful, learn fast, and make technology work for communities that are usually overlooked.</p>
-      </div></div>
-      <aside className="currently"><span>Currently</span><p>Studying at Hunter College</p><p>Building HLPR</p><p>Looking for 2027 opportunities</p></aside>
-    </div></section>
-
-    <section className="toolkit wrap"><div className="section-head compact"><div><p className="eyebrow">03 / Toolkit</p><h2>What I work with.</h2></div></div>
-      <div className="skills" aria-label="Technical skills">{skills.map((skill, index) => <span key={skill}><small>{String(index + 1).padStart(2, "0")}</small>{skill}</span>)}</div>
-    </section>
-
-    <section className="contact" id="contact"><div className="wrap contact-inner">
-      <p className="eyebrow">04 / Let’s talk</p><h2>Have an idea?<br /><em>Let’s build it.</em></h2>
-      <p className="contact-copy">I’m looking for software engineering internships, ambitious collaborators, and projects worth caring about.</p>
-      <div className="contact-links"><a href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub <Arrow /></a></div>
-      <footer><span>© {new Date().getFullYear()} Temitayo Babarinde</span><a href="#top">Back to top ↑</a></footer>
-    </div></section>
-  </main>;
+      <section className="contact" id="contact">
+        <p className="eyebrow">Want to build something?</p>
+        <h2>Let’s play<br /><em>a good hand.</em></h2>
+        <div className="contact-row">
+          <p>Interested in software internships, hackathons, ambitious collaborators, and projects worth caring about.</p>
+          <div className="contact-links">
+            <a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+            <a href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+          </div>
+        </div>
+        <footer><span>© {new Date().getFullYear()} Temitayo Babarinde</span><a href="#top">Back to top ↑</a></footer>
+      </section>
+    </main>
+  );
 }
