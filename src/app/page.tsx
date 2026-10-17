@@ -1,3 +1,5 @@
+"use client";
+
 type CardInfo = {
   rank: string;
   suit: "diamonds" | "spades" | "hearts" | "clubs";
@@ -132,6 +134,21 @@ export default function Page() {
                   <ul>{card.lines.map((line) => <li key={line}>{line}</li>)}</ul>
                   {card.link && <a className="card-link" href={card.link.href} target="_blank" rel="noreferrer">{card.link.label}<span aria-hidden="true">↗</span></a>}
                 </div>
+                {!card.identity && (
+                  <button
+                    className="card-close"
+                    type="button"
+                    aria-label={`Turn ${card.title} back over`}
+                    onClick={(event) => {
+                      const details = event.currentTarget.closest("details");
+                      if (!details) return;
+                      details.open = false;
+                      details.querySelector("summary")?.focus();
+                    }}
+                  >
+                    ↶
+                  </button>
+                )}
                 <div className="card-foot"><span>TB</span><span>{symbols[card.suit]}</span><span>{String(index + 1).padStart(2, "0")} / 07</span></div>
               </div>
             </details>
