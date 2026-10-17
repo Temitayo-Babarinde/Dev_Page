@@ -51,7 +51,7 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .suit-key b { margin-right: 2px; color: var(--black-suit); font-size: 11px; font-weight: 500; }
 .suit-key span:nth-child(1) b, .suit-key span:nth-child(3) b { color: var(--red); }
 .fan { height: 445px; max-width: 1500px; position: relative; margin: 12px auto 0; perspective: 1600px; }
-.playing-card { position: absolute; top: 20px; left: 50%; width: 246px; height: 362px; margin-left: 0; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
+.playing-card { position: absolute; top: 40px; left: 50%; width: 246px; height: 362px; margin-left: 0; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
 .playing-card:nth-child(1) { --fan-x: -420px; --fan-angle: -28deg; --fan-y: 20px; z-index: 1; }
 .playing-card:nth-child(2) { --fan-x: -280px; --fan-angle: -19deg; --fan-y: 5px; z-index: 2; }
 .playing-card:nth-child(3) { --fan-x: -140px; --fan-angle: -10deg; --fan-y: -3px; z-index: 3; }
