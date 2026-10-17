@@ -18,44 +18,43 @@ const cards: CardInfo[] = [
     rank: "Q",
     suit: "spades",
     title: "More experiments",
-    kicker: "Selected projects",
-    description: "A few other ideas I’ve explored across data, tools, and games.",
+    kicker: "Spades · Side projects",
+    description: "Small builds across data, sunlight, and game systems.",
     lines: [
-      "AI Startup Tracker — startup activity into a focused daily brief.",
-      "Solar Time — daylight, sunrise, and seasonal change over time.",
-      "Nightmare FPS — momentum, toxic zones, and environmental storytelling.",
+      "AI Startup Tracker · startup activity briefs",
+      "Solar Time · daylight and seasonal change",
+      "Nightmare FPS · systems-driven horror game",
     ],
     link: { label: "Browse my GitHub", href: "https://github.com/Temitayo-Babarinde" },
   },
   {
     rank: "A",
     suit: "diamonds",
-    title: "Skills & tools",
-    kicker: "What I work with",
-    description: "A growing toolkit for building across software, data, and interactive experiences.",
+    title: "Languages",
+    kicker: "Diamonds · Programming",
+    description: "The languages I use to explore and build.",
     lines: [
-      "Languages · Python, C++, JavaScript, Go, HTML, CSS, TypeScript",
-      "Web · React, Next.js, Node.js",
-      "Data · Supabase, PostgreSQL",
-      "Creative · Godot, game systems, visual design",
+      "Python · C++ · Go",
+      "JavaScript · TypeScript",
+      "HTML · CSS",
     ],
   },
   {
     rank: "K",
     suit: "spades",
     title: "HLPR",
-    kicker: "Student collaboration · Hunter College",
-    description: "A private class workspace for Hunter students to find their course section, talk with classmates, share tasks, and keep a living syllabus together.",
-    lines: ["Next.js 16 + React 19", "Supabase Auth + Postgres", "Realtime discussions · shared tasks · class syllabus"],
+    kicker: "Spades · Campus product",
+    description: "A private workspace for Hunter students to coordinate class life.",
+    lines: ["Next.js · React", "Supabase Auth · Postgres", "Course discussions · shared tasks · syllabus"],
     link: { label: "Open the HLPR repo", href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1" },
   },
   {
     rank: "J",
     suit: "clubs",
     title: "Temitayo Babarinde",
-    kicker: "Jack of all trades",
-    description: "Student developer, curious builder, and lifelong learner.",
-    lines: ["Freshman · Hunter College", "Computer Science + Mathematics", "Queens, New York · grew up in Nigeria", "Looking for 2027 opportunities"],
+    kicker: "Clubs · The person behind the work",
+    description: "Freshman at Hunter College studying computer science and mathematics.",
+    lines: ["Based in Queens, New York", "Grew up in Nigeria"],
     link: { label: "Say hello on LinkedIn", href: "https://www.linkedin.com/in/temitayo-babarinde-4198202a2" },
     identity: true,
   },
@@ -63,27 +62,26 @@ const cards: CardInfo[] = [
     rank: "10",
     suit: "spades",
     title: "Strategy Lab",
-    kicker: "AI safety demo · Daytona HackSprint",
-    description: "A research prototype that runs a generated trading candidate in an isolated Daytona sandbox, checks for lookahead leakage, and traces a bounded repair loop.",
-    lines: ["Python · Daytona · Arize / Phoenix", "Amazon Bedrock repair path", "Synthetic data · not evidence of trading performance"],
+    kicker: "Spades · Built at Daytona HackSprint",
+    description: "An AI safety prototype that runs generated strategies in an isolated sandbox and flags lookahead leakage.",
+    lines: ["Daytona sandboxes · Arize / Phoenix traces", "Bounded repair with Amazon Bedrock", "Synthetic data · not a performance claim"],
     link: { label: "Open the Strategy Lab repo", href: "https://github.com/Temitayo-Babarinde/strategy-lab" },
   },
   {
     rank: "K",
     suit: "hearts",
     title: "About me",
-    kicker: "Learning in public",
-    description: "I’m interested in backend systems, AI products, and small design decisions that make software easier to use.",
-    lines: ["Studying Computer Science + Mathematics", "Building HLPR for the Hunter community", "Interested in web, AI, and interactive systems"],
+    kicker: "Hearts · Interests",
+    description: "I like building where careful systems meet visual creativity.",
+    lines: ["Backend systems · AI products", "Interactive software · game design", "Open to 2027 opportunities"],
   },
   {
-    rank: "8",
-    suit: "clubs",
-    title: "Daytona HackSprint",
-    kicker: "Hackathon · New York City · 2026",
-    description: "A one-day build sprint at the frontier of AI. I participated solo and built Strategy Lab around the Daytona and Arize tools.",
-    lines: ["Sponsor tools · Daytona + Arize", "Project · eval-gated backtest demo", "Also explored AWS Bedrock for bounded repairs"],
-    link: { label: "See the project", href: "https://github.com/Temitayo-Babarinde/strategy-lab" },
+    rank: "9",
+    suit: "diamonds",
+    title: "Web & data tools",
+    kicker: "Diamonds · Frameworks & data",
+    description: "Tools I reach for across web products and interactive work.",
+    lines: ["React · Next.js · Node.js", "Supabase · PostgreSQL", "Godot · game systems · visual design"],
   },
 ];
 
@@ -114,7 +112,13 @@ export default function Page() {
       </section>
 
       <section className="card-table" id="hand" aria-label="A fan of playing cards. Hover, focus, or tap a card to reveal its details.">
-        <div className="table-caption"><span>THE DECK</span><span>01 — 07</span></div>
+        <div className="table-caption">
+          <span>THE DECK</span>
+          <span className="suit-key" aria-label="Suit guide">
+            <span><b>♦</b> Skills</span><span><b>♠</b> Projects</span><span><b>♥</b> Interests</span><span><b>♣</b> Profile</span>
+          </span>
+          <span>01 — 07</span>
+        </div>
         <div className="fan">
           {cards.map((card, index) => (
             <details
