@@ -1,6 +1,6 @@
 # Temitayo Babarinde — Portfolio
 
-A personal portfolio for Temitayo Babarinde, a Computer Science and Mathematics student at Hunter College. The page highlights two current projects, the work behind them, and ways to get in touch.
+A personal portfolio for Temitayo Babarinde, a Computer Science and Mathematics freshman at Hunter College. The page uses a fan of playing cards: the Jack introduces Temitayo, and the other cards reveal skills, projects, background, and hackathon work when hovered, focused, or tapped.
 
 ## Stack
 
@@ -23,10 +23,10 @@ Open [http://localhost:3000](http://localhost:3000).
 npm run build
 ```
 
-## Content and design
+## Content and interaction
 
-- `src/app/page.tsx` contains the portfolio sections and project descriptions.
-- `src/globals.css` defines the responsive editorial layout, typography, colors, and interaction states.
+- `src/app/page.tsx` contains the card deck and portfolio content.
+- `src/globals.css` defines the responsive card fan, suit colors, and 3D side-flip transitions.
 - `src/app/layout.tsx` contains the page metadata.
 
-Project summaries link to their source repositories. Strategy Lab uses synthetic data for a repeatable safety demo; its results are not evidence of trading performance. HLPR is a private class workspace intended for Hunter College students.
+Cards flip on hover or keyboard focus; on touch devices, tap the back of a card to turn it over. The fan becomes a swipeable card row on small screens. Reduced-motion settings shorten transitions. Project summaries link to their source repositories. Strategy Lab uses synthetic data for a repeatable safety demo; its results are not evidence of trading performance. HLPR is a private class workspace intended for Hunter College students.
