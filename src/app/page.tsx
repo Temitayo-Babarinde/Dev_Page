@@ -107,7 +107,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="table" id="hand" aria-label="A fan of playing cards. Hover, focus, or tap a card to reveal its details.">
+      <section className="card-table" id="hand" aria-label="A fan of playing cards. Hover, focus, or tap a card to reveal its details.">
         <div className="table-caption"><span>THE DECK</span><span>01 — 07</span></div>
         <div className="fan">
           {cards.map((card, index) => (
