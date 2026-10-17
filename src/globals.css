@@ -44,8 +44,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .flip-hint { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .07em; }
 .flip-hint i { color: var(--red); font-size: 17px; font-style: normal; vertical-align: -2px; margin-right: 6px; }
 
-.table { min-height: 515px; position: relative; overflow: hidden; background: #e6e1d8; border-top: 1px solid #d4cfc4; border-bottom: 1px solid #d4cfc4; }
-.table::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .45; background-image: linear-gradient(90deg, transparent calc(50% - .5px), rgba(83,77,69,.09) 50%, transparent calc(50% + .5px)); }
+.card-table { min-height: 515px; position: relative; overflow: hidden; background: #e6e1d8; border-top: 1px solid #d4cfc4; border-bottom: 1px solid #d4cfc4; }
+.card-table::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .45; background-image: linear-gradient(90deg, transparent calc(50% - .5px), rgba(83,77,69,.09) 50%, transparent calc(50% + .5px)); }
 .table-caption { position: absolute; z-index: 20; top: 22px; left: max(48px, calc((100% - 1440px) / 2)); right: max(48px, calc((100% - 1440px) / 2)); display: flex; justify-content: space-between; color: #817b72; font-size: 8px; letter-spacing: .13em; }
 .fan { height: 445px; max-width: 1500px; position: relative; margin: 12px auto 0; perspective: 1600px; }
 .playing-card { position: absolute; top: 20px; left: 50%; width: 246px; height: 362px; margin-left: -123px; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
@@ -134,7 +134,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
   .intro-bottom { align-items: start; flex-direction: column; }
   .intro-bottom > p { max-width: 390px; font-size: 14px; }
   .flip-hint { margin-top: 1px; }
-  .table { min-height: 440px; }
+  .card-table { min-height: 440px; }
   .table-caption { left: 18px; right: 18px; }
   .fan { height: 395px; display: flex; align-items: flex-start; overflow-x: auto; overflow-y: hidden; margin-top: 10px; padding: 31px max(18px, calc((100vw - 214px) / 2)) 22px; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
   .playing-card { position: relative; top: auto; left: auto; flex: 0 0 214px; margin-left: -120px; transform: rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; }
