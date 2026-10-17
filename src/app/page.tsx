@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 type CardInfo = {
   rank: string;
   suit: "diamonds" | "spades" | "hearts" | "clubs";
@@ -88,6 +90,8 @@ const cards: CardInfo[] = [
 const symbols = { diamonds: "♦", spades: "♠", hearts: "♥", clubs: "♣" };
 
 export default function Page() {
+  const [openCards, setOpenCards] = useState<Set<number>>(() => new Set([3]));
+
   return (
     <main id="top">
       <a className="skip-link" href="#hand">Skip to the cards</a>
@@ -116,7 +120,17 @@ export default function Page() {
             <details
               className={`playing-card suit-${card.suit}${card.identity ? " identity-card" : ""}`}
               key={`${card.rank}-${card.title}`}
-              open={card.identity}
+              open={openCards.has(index)}
+              onToggle={(event) => {
+                const isOpen = event.currentTarget.open;
+                setOpenCards((current) => {
+                  if (current.has(index) === isOpen) return current;
+                  const next = new Set(current);
+                  if (isOpen) next.add(index);
+                  else next.delete(index);
+                  return next;
+                });
+              }}
               style={{ "--card-index": index } as React.CSSProperties}
             >
               <summary className="card-back" aria-label={`Reveal ${card.title}`}>
@@ -140,10 +154,13 @@ export default function Page() {
                     type="button"
                     aria-label={`Turn ${card.title} back over`}
                     onClick={(event) => {
-                      const details = event.currentTarget.closest("details");
-                      if (!details) return;
-                      details.open = false;
-                      details.querySelector("summary")?.focus();
+                      setOpenCards((current) => {
+                        if (!current.has(index)) return current;
+                        const next = new Set(current);
+                        next.delete(index);
+                        return next;
+                      });
+                      event.currentTarget.closest("details")?.querySelector("summary")?.focus();
                     }}
                   >
                     ↶
