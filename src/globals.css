@@ -56,7 +56,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .playing-card:nth-child(5) { --fan-x: 140px; --fan-angle: 10deg; --fan-y: -3px; z-index: 4; }
 .playing-card:nth-child(6) { --fan-x: 280px; --fan-angle: 19deg; --fan-y: 5px; z-index: 2; }
 .playing-card:nth-child(7) { --fan-x: 420px; --fan-angle: 28deg; --fan-y: 20px; z-index: 1; }
-.playing-card:hover, .playing-card:focus-within { z-index: 50; transform: translateX(calc(-50% + var(--fan-x))) rotate(0deg) translateY(-22px) scale(1.045); filter: drop-shadow(0 20px 20px rgba(36,35,33,.23)); }
+.playing-card:hover, .playing-card:focus-within { z-index: 50; filter: drop-shadow(0 20px 20px rgba(36,35,33,.23)); }
 .playing-card[open] { filter: drop-shadow(0 16px 19px rgba(36,35,33,.2)); }
 .card-back, .card-front { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform .78s cubic-bezier(.2,.75,.2,1), visibility 0s linear .4s; transform-origin: left center; }
 .card-back { display: flex; flex-direction: column; justify-content: space-between; padding: 16px; color: #f2eee7; background-color: #2c2d31; border: 1px solid #aa9a88; cursor: pointer; list-style: none; }
@@ -96,10 +96,11 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
 .identity-card .card-kicker { min-height: unset; margin-bottom: 12px; }
 .identity-mark { margin: 0 0 7px; color: var(--red); font-size: 7px; letter-spacing: .16em; }
 .identity-mark span { display: block; margin-top: 3px; color: #6f6960; font-size: 6px; }
-.identity-card .card-description { max-width: 170px; margin-bottom: 7px; }
+.identity-card .card-description { max-width: 170px; }
+.identity-card .card-description { margin-bottom: 7px; }
+.identity-card .card-front li { font-size: 8px; }
 .identity-card .card-front ul { gap: 4px; padding-top: 7px; }
 .identity-card .card-link { margin-top: 7px; }
-.identity-card .card-front li { font-size: 8px; }
 .card-foot { position: absolute; right: 17px; bottom: 12px; left: 17px; display: flex; align-items: center; justify-content: space-between; color: #878076; font-size: 7px; letter-spacing: .08em; }
 .card-foot span:nth-child(1) { font-weight: 500; }
 .card-foot span:nth-child(2) { color: var(--black-suit); font-size: 12px; }
@@ -144,16 +145,6 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--red); outline-
   .card-table { min-height: 440px; }
   .table-caption { left: 18px; right: 18px; }
   .fan { height: 395px; margin-top: 10px; padding: 31px max(18px, calc(50vw - 389px)) 22px; }
-  .playing-card { position: relative; top: auto; left: auto; flex: 0 0 214px; margin-left: -120px; transform: rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; }
-  .playing-card:first-child { margin-left: 0; }
-  .playing-card:nth-child(1) { --fan-angle: -13deg; --fan-y: 17px; }
-  .playing-card:nth-child(2) { --fan-angle: -9deg; --fan-y: 7px; }
-  .playing-card:nth-child(3) { --fan-angle: -4deg; --fan-y: 0px; }
-  .playing-card:nth-child(4) { --fan-angle: 0deg; --fan-y: -7px; }
-  .playing-card:nth-child(5) { --fan-angle: 5deg; --fan-y: 0px; }
-  .playing-card:nth-child(6) { --fan-angle: 9deg; --fan-y: 7px; }
-  .playing-card:nth-child(7) { --fan-angle: 13deg; --fan-y: 17px; }
-  .playing-card:hover, .playing-card:focus-within { transform: translateY(-14px) rotate(0deg) scale(1.025); }
   .fan-note { bottom: 12px; font-size: 10px; }
   .contact { padding: 62px 18px 20px; }
   .contact h2 { margin: 21px 0 28px; font-size: 64px; }
