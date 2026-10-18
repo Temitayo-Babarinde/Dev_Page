@@ -151,7 +151,7 @@ export default function Page() {
                   <small>{String(suitCards.length).padStart(2, "0")} cards</small>
                 </div>
                 <div className="cards-row">
-                  {suitCards.map(({ card, index }) => (
+                  {suitCards.map(({ card, index }, suitIndex) => (
                     <article
                       className={`playing-card suit-${card.suit}${card.identity ? " identity-card is-open" : activeCard === index ? " is-open" : ""}`}
                       key={`${card.rank}-${card.title}`}
@@ -191,7 +191,7 @@ export default function Page() {
                             ↶
                           </button>
                         )}
-                        <div className="card-foot"><span>TB</span><span>{symbols[card.suit]}</span><span>{String(index + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</span></div>
+                        <div className="card-foot"><span>TB</span><span>{symbols[card.suit]}</span><span>{String(suitIndex + 1).padStart(2, "0")} / {String(suitCards.length).padStart(2, "0")}</span></div>
                       </div>
                     </article>
                   ))}
