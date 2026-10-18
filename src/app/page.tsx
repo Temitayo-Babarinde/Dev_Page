@@ -110,6 +110,8 @@ const suitRows: { suit: CardInfo["suit"]; label: string }[] = [
 
 export default function Page() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [dismissedHoverCard, setDismissedHoverCard] = useState<number | null>(null);
 
   return (
     <main id="top">
@@ -128,7 +130,7 @@ export default function Page() {
         <h1 id="page-title">Jack of <em>all trades.</em></h1>
         <div className="intro-bottom">
           <p>Pick a card. My skills, projects, and the story behind them are in the hand.</p>
-          <span className="flip-hint"><i aria-hidden="true">↻</i> Click or tap to reveal</span>
+          <span className="flip-hint"><i aria-hidden="true">↻</i> Hover, click, or tap to reveal</span>
         </div>
       </section>
 
@@ -153,14 +155,19 @@ export default function Page() {
                 <div className="cards-row">
                   {suitCards.map(({ card, index }, suitIndex) => (
                     <article
-                      className={`playing-card suit-${card.suit}${card.identity ? " identity-card is-open" : activeCard === index ? " is-open" : ""}`}
+                      className={`playing-card suit-${card.suit}${card.identity ? " identity-card is-open" : activeCard === index ? " is-open" : hoveredCard === index && dismissedHoverCard !== index ? " is-hovered" : ""}`}
                       key={`${card.rank}-${card.title}`}
+                      onMouseEnter={() => setHoveredCard(index)}
+                      onMouseLeave={() => {
+                        setHoveredCard(null);
+                        if (dismissedHoverCard === index) setDismissedHoverCard(null);
+                      }}
                     >
                       <button
                         className="card-back"
                         type="button"
                         aria-label={`${activeCard === index ? "Turn back" : "Reveal"} ${card.title}`}
-                        aria-expanded={card.identity || activeCard === index}
+                        aria-expanded={card.identity || activeCard === index || (hoveredCard === index && dismissedHoverCard !== index)}
                         aria-controls={`card-front-${index}`}
                         onClick={() => setActiveCard(activeCard === index ? null : index)}
                       >
@@ -185,6 +192,7 @@ export default function Page() {
                             aria-label={`Turn ${card.title} back over`}
                             onClick={(event) => {
                               setActiveCard(null);
+                              setDismissedHoverCard(index);
                               event.currentTarget.closest(".playing-card")?.querySelector<HTMLButtonElement>(".card-back")?.focus();
                             }}
                           >
