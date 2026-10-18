@@ -75,6 +75,8 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .playing-card.is-open .card-back { transform: rotateY(180deg); visibility: hidden; }
 .playing-card.is-open .card-back { transition-delay: 0s, .78s; }
 .playing-card.is-open .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
+.playing-card.is-hovered:not(.is-open) .card-back { transform: rotateY(180deg); visibility: hidden; transition-delay: 0s, .78s; }
+.playing-card.is-hovered:not(.is-open) .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
 .suit-hearts .card-corner, .suit-hearts .card-foot span:nth-child(2), .suit-diamonds .card-corner, .suit-diamonds .card-foot span:nth-child(2), .suit-hearts .back-index, .suit-diamonds .back-index { color: var(--red); }
 .card-corner { display: flex; gap: 3px; align-items: baseline; width: fit-content; flex-direction: column; color: var(--black-suit); font-family: var(--serif); font-size: 15px; line-height: .9; }
 .card-corner b { font-size: 19px; font-weight: 500; }
