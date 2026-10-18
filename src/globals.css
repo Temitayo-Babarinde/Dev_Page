@@ -57,8 +57,14 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .suit-row-diamonds .suit-row-heading > span, .suit-row-hearts .suit-row-heading > span { color: var(--red); }
 .suit-row-heading h2 { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: -.02em; }
 .suit-row-heading small { margin-left: auto; color: #817b72; font: 8px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
-.cards-row { display: flex; align-items: stretch; gap: 15px; overflow: visible; padding: 9px 6px 20px; }
-.playing-card { position: relative; flex: 0 0 220px; width: 220px; height: 340px; border-radius: 4px; perspective: 1400px; transform: translateY(0); transform-origin: center 90%; transition: transform .35s cubic-bezier(.18,.72,.28,1), box-shadow .35s ease; box-shadow: 2px 2px 0 #e4ddd2, 4px 4px 0 #c9c0b3, 8px 12px 17px rgba(36,35,33,.16); }
+.cards-row { display: flex; align-items: stretch; justify-content: center; gap: 15px; overflow: visible; padding: 26px 6px 38px; }
+.playing-card { position: relative; flex: 0 0 220px; width: 220px; height: 340px; border-radius: 4px; perspective: 1400px; transform: rotate(var(--fan-angle, 0deg)) translateY(var(--fan-drop, 0px)); transform-origin: center 90%; transition: transform .35s cubic-bezier(.18,.72,.28,1), box-shadow .35s ease; box-shadow: 2px 2px 0 #e4ddd2, 4px 4px 0 #c9c0b3, 8px 12px 17px rgba(36,35,33,.16); }
+.suit-row-spades .playing-card:nth-child(1) { --fan-angle: -6deg; --fan-drop: 14px; }
+.suit-row-spades .playing-card:nth-child(2) { --fan-angle: -3deg; --fan-drop: 4px; }
+.suit-row-spades .playing-card:nth-child(4) { --fan-angle: 3deg; --fan-drop: 4px; }
+.suit-row-spades .playing-card:nth-child(5) { --fan-angle: 6deg; --fan-drop: 14px; }
+.suit-row-diamonds .playing-card:nth-child(1) { --fan-angle: -5deg; --fan-drop: 8px; }
+.suit-row-diamonds .playing-card:nth-child(3) { --fan-angle: 5deg; --fan-drop: 8px; }
 .playing-card:hover, .playing-card:focus-within { z-index: 70; box-shadow: 3px 3px 0 #e4ddd2, 6px 6px 0 #c9c0b3, 12px 18px 22px rgba(36,35,33,.22); }
 .playing-card.is-open:not(:hover):not(:focus-within) { z-index: 60 !important; box-shadow: 3px 3px 0 #e4ddd2, 6px 6px 0 #c9c0b3, 12px 18px 22px rgba(36,35,33,.2); }
 .card-back, .card-front { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform .78s cubic-bezier(.2,.75,.2,1), visibility 0s linear .78s; transform-origin: center center; }
@@ -119,7 +125,8 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .contact footer { min-height: 62px; display: flex; justify-content: space-between; align-items: end; margin-top: 65px; padding-top: 19px; border-top: 1px solid var(--line); color: var(--muted); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
 
 @media (max-width: 1200px) {
-  .cards-row { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
+  .cards-row { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: #b6aea1 transparent; }
+  .suit-row-hearts .cards-row, .suit-row-clubs .cards-row { justify-content: center; }
   .playing-card { flex-basis: 220px; }
   .card-front { padding-inline: 15px; }
   .card-copy { padding-top: 7px; }
@@ -141,6 +148,12 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
   .suit-key { gap: 7px; font-size: 7px; }
   .suit-rows { gap: 23px; }
   .cards-row { gap: 12px; }
+  .suit-row-spades .playing-card:nth-child(1) { --fan-angle: -4deg; --fan-drop: 9px; }
+  .suit-row-spades .playing-card:nth-child(2) { --fan-angle: -2deg; --fan-drop: 2px; }
+  .suit-row-spades .playing-card:nth-child(4) { --fan-angle: 2deg; --fan-drop: 2px; }
+  .suit-row-spades .playing-card:nth-child(5) { --fan-angle: 4deg; --fan-drop: 9px; }
+  .suit-row-diamonds .playing-card:nth-child(1) { --fan-angle: -3deg; --fan-drop: 5px; }
+  .suit-row-diamonds .playing-card:nth-child(3) { --fan-angle: 3deg; --fan-drop: 5px; }
   .playing-card { flex-basis: 210px; width: 210px; height: 332px; }
   .suit-row-heading h2 { font-size: 12px; }
   .fan-note { font-size: 10px; }
