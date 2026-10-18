@@ -51,7 +51,7 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .suit-key b { margin-right: 2px; color: var(--black-suit); font-size: 11px; font-weight: 500; }
 .suit-key span:nth-child(1) b, .suit-key span:nth-child(3) b { color: var(--red); }
 .fan { height: 445px; max-width: 1500px; position: relative; margin: 12px auto 0; perspective: 1600px; }
-.playing-card { position: absolute; top: 40px; left: 50%; width: 246px; height: 362px; margin-left: 0; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), filter .45s ease; }
+.playing-card { position: absolute; top: 40px; left: 50%; width: 246px; height: 362px; margin-left: 0; border-radius: 4px; perspective: 1400px; transform: translateX(calc(-50% + var(--fan-x))) rotate(var(--fan-angle)) translateY(var(--fan-y)); transform-origin: center 90%; transition: transform .45s cubic-bezier(.18,.72,.28,1), box-shadow .35s ease; box-shadow: 2px 2px 0 #e4ddd2, 4px 4px 0 #c9c0b3, 8px 12px 17px rgba(36,35,33,.16); }
 .playing-card:nth-child(1) { --fan-x: -420px; --fan-angle: -28deg; --fan-y: 20px; z-index: 1; }
 .playing-card:nth-child(2) { --fan-x: -280px; --fan-angle: -19deg; --fan-y: 5px; z-index: 2; }
 .playing-card:nth-child(3) { --fan-x: -140px; --fan-angle: -10deg; --fan-y: -3px; z-index: 3; }
@@ -59,9 +59,9 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .playing-card:nth-child(5) { --fan-x: 140px; --fan-angle: 10deg; --fan-y: -3px; z-index: 4; }
 .playing-card:nth-child(6) { --fan-x: 280px; --fan-angle: 19deg; --fan-y: 5px; z-index: 2; }
 .playing-card:nth-child(7) { --fan-x: 420px; --fan-angle: 28deg; --fan-y: 20px; z-index: 1; }
-.playing-card:hover, .playing-card:focus-within { z-index: 70; filter: drop-shadow(0 20px 20px rgba(36,35,33,.23)); }
-.playing-card.is-open:not(:hover):not(:focus-within) { z-index: 60 !important; filter: drop-shadow(0 16px 19px rgba(36,35,33,.2)); }
-.card-back, .card-front { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform .78s cubic-bezier(.2,.75,.2,1), visibility 0s linear .4s; transform-origin: left center; }
+.playing-card:hover, .playing-card:focus-within { z-index: 70; box-shadow: 3px 3px 0 #e4ddd2, 6px 6px 0 #c9c0b3, 12px 18px 22px rgba(36,35,33,.22); }
+.playing-card.is-open:not(:hover):not(:focus-within) { z-index: 60 !important; box-shadow: 3px 3px 0 #e4ddd2, 6px 6px 0 #c9c0b3, 12px 18px 22px rgba(36,35,33,.2); }
+.card-back, .card-front { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform .78s cubic-bezier(.2,.75,.2,1), visibility 0s linear .4s; transform-origin: center center; }
 .card-back { display: flex; flex-direction: column; justify-content: space-between; width: 100%; padding: 16px; color: #f2eee7; background-color: #2c2d31; border: 1px solid #aa9a88; cursor: pointer; font: inherit; text-align: left; appearance: none; }
 .card-back::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(231,224,211,.5); pointer-events: none; }
 .card-back::after { content: ""; position: absolute; inset: 13px; opacity: .43; pointer-events: none; background-image: repeating-linear-gradient(45deg, transparent 0 9px, rgba(232,220,202,.44) 9px 10px, transparent 10px 18px), repeating-linear-gradient(-45deg, transparent 0 9px, rgba(232,220,202,.31) 9px 10px, transparent 10px 18px); mask-image: linear-gradient(135deg, transparent 1%, black 18%, black 82%, transparent 99%); }
@@ -71,10 +71,10 @@ a:focus-visible, .card-back:focus-visible { outline: 2px solid var(--red); outli
 .back-ornament::after { transform: rotate(0deg); }
 .back-ornament i { position: relative; z-index: 1; color: #e6beb3; font-size: 34px; font-style: normal; }
 .back-caption { position: relative; z-index: 2; align-self: center; color: #c7bdb0; font-size: 7px; letter-spacing: .2em; }
-.card-front { display: block; padding: 16px 17px 14px; background: var(--card); border: 1px solid #c8c1b6; color: var(--ink); transform: rotateY(180deg); visibility: hidden; }
-.playing-card.is-open .card-back { transform: rotateY(-180deg); visibility: hidden; }
+.card-front { display: block; padding: 16px 17px 14px; background: var(--card); border: 1px solid #c8c1b6; color: var(--ink); transform: rotateY(-180deg); visibility: hidden; }
+.playing-card.is-open .card-back { transform: rotateY(180deg); visibility: hidden; }
 .playing-card.is-open .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
-.playing-card:not(.is-open):is(:hover, :focus-within) .card-back { transform: rotateY(-180deg); visibility: hidden; transition-delay: 0s, .4s; }
+.playing-card:not(.is-open):is(:hover, :focus-within) .card-back { transform: rotateY(180deg); visibility: hidden; transition-delay: 0s, .4s; }
 .playing-card:not(.is-open):is(:hover, :focus-within) .card-front { transform: rotateY(0deg); visibility: visible; transition-delay: 0s; }
 .suit-hearts .card-corner, .suit-hearts .card-foot span:nth-child(2), .suit-diamonds .card-corner, .suit-diamonds .card-foot span:nth-child(2), .suit-hearts .back-index, .suit-diamonds .back-index { color: var(--red); }
 .card-corner { display: flex; gap: 3px; align-items: baseline; width: fit-content; flex-direction: column; color: var(--black-suit); font-family: var(--serif); font-size: 15px; line-height: .9; }
