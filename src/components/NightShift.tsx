@@ -1,107 +1,49 @@
 "use client";
+import { useEffect, useReducer, useRef, useState } from "react";
+import { gameReducer, initialGame } from "./game-engine";
 
-import { useEffect, useRef, useState } from "react";
-
-const targets = [7, 2, 3, 8, 9, 4, 14, 19];
-const symbols = ["π", "∑", "λ", "∞", "✳", "∂", "√", "x"];
-
-export default function NightShift() {
-  const [started, setStarted] = useState(false);
-  const [position, setPosition] = useState(12);
-  const [targetIndex, setTargetIndex] = useState(0);
-  const [seconds, setSeconds] = useState(25);
-  const [finished, setFinished] = useState(false);
-  const [won, setWon] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const score = Math.min(targetIndex, 5);
-  const target = targets[targetIndex % targets.length];
-
-  useEffect(() => {
-    if (started && !finished && position === target) {
-      const nextScore = targetIndex + 1;
-      setTargetIndex(nextScore);
-      if (nextScore >= 5) {
-        setWon(true);
-        setFinished(true);
-      }
-    }
-  }, [started, finished, position, target, targetIndex]);
-
-  useEffect(() => {
-    if (!started || finished) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      const moves: Record<string, number> = { ArrowUp: -5, w: -5, W: -5, ArrowDown: 5, s: 5, S: 5, ArrowLeft: -1, a: -1, A: -1, ArrowRight: 1, d: 1, D: 1 };
-      const delta = moves[event.key];
-      if (delta === undefined) return;
-      event.preventDefault();
-      move(delta);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [started, finished, position]);
-
-  useEffect(() => {
-    if (!started || finished) return;
-    timerRef.current = setInterval(() => {
-      setSeconds((remaining) => {
-        if (remaining <= 1) {
-          setFinished(true);
-          return 0;
-        }
-        return remaining - 1;
-      });
-    }, 1000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [started, finished]);
-
-  function move(delta: number) {
-    if (!started || finished) return;
-    let next = position + delta;
-    if (delta === -1 && position % 5 === 0) next = position;
-    if (delta === 1 && position % 5 === 4) next = position;
-    if (next < 0 || next > 24) next = position;
-    setPosition(next);
+export default function NightShift({ active = true }: { active?: boolean }) {
+  const [state, dispatch] = useReducer(gameReducer, initialGame);
+  const [best, setBest] = useState(0);
+  const area = useRef<HTMLDivElement>(null);
+  useEffect(() => { try { const n = Number(localStorage.getItem("temitayo-math-best-v1")); if (Number.isFinite(n) && n > 0) setBest(n); } catch {} }, []);
+  useEffect(() => { if (!active) dispatch({ type: "pause" }); }, [active]);
+  useEffect(() => { const pause = () => { if (document.hidden) dispatch({ type: "pause" }); }; document.addEventListener("visibilitychange", pause); return () => document.removeEventListener("visibilitychange", pause); }, []);
+  useEffect(() => { if (state.score > best) { setBest(state.score); try { localStorage.setItem("temitayo-math-best-v1", String(state.score)); } catch {} } }, [state.score, best]);
+  function start() {
+    const seed = typeof crypto !== "undefined" ? crypto.getRandomValues(new Uint32Array(1))[0] : Date.now();
+    dispatch({ type: "start", seed }); area.current?.focus();
   }
-
-  function restart() {
-    if (timerRef.current) clearInterval(timerRef.current);
-    setStarted(true);
-    setPosition(12);
-    setTargetIndex(0);
-    setSeconds(25);
-    setFinished(false);
-    setWon(false);
-  }
-
-  return (
-    <div className="night-game">
-      <div className="game-topline"><span>NIGHT WALK / 01</span><span>{String(seconds).padStart(2, "0")} SEC</span></div>
-      <div className="game-status" aria-live="polite">
-        {won ? "You found your way." : finished ? "The night got away from you." : started ? "Collect the symbols." : "The city is quiet. Take a short walk."}
-      </div>
-      <div className={`game-board ${started ? "game-board-active" : ""}`} role="grid" aria-label="Five by five night walk game board">
-        {Array.from({ length: 25 }, (_, index) => {
-          const isPlayer = index === position;
-          const isTarget = index === target && !finished && !won;
-          return (
-            <div className={`game-cell ${isPlayer ? "game-player" : ""} ${isTarget ? "game-target" : ""}`} role="gridcell" aria-label={isPlayer ? "Your position" : isTarget ? "Collectible symbol" : "Path"} key={index}>
-              {isPlayer ? <span className="player-dot">T</span> : isTarget ? <span className="target-symbol" aria-hidden="true">{symbols[targetIndex % symbols.length]}</span> : <span className="cell-star" aria-hidden="true">{index % 6 === 0 ? "·" : ""}</span>}
-            </div>
-          );
-        })}
-      </div>
-      <div className="game-controls">
-        <span className="game-score">FOUND <b>{score}/5</b></span>
-        {!started || finished
-          ? <button className="game-button" onClick={restart}>{won ? "Walk again" : finished ? "Try again" : "Start the walk"} <span aria-hidden="true">↗</span></button>
-          : <div className="dpad" aria-label="Movement controls">
-              <button onClick={() => move(-5)} aria-label="Move up">↑</button>
-              <button onClick={() => move(-1)} aria-label="Move left">←</button>
-              <button onClick={() => move(5)} aria-label="Move down">↓</button>
-              <button onClick={() => move(1)} aria-label="Move right">→</button>
-            </div>}
-      </div>
-      <p className="game-hint">MOVE WITH ARROWS OR WASD</p>
+  function move(dx: number, dy: number) { dispatch({ type: "move", dx, dy }); area.current?.focus(); }
+  return <div className="math-game" ref={area} tabIndex={0} role="group" aria-label="Endless math walk. Arrow keys or WASD to move." onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) dispatch({ type: "pause" }); }} onKeyDown={e => {
+    if (!state.running || e.ctrlKey || e.metaKey || e.altKey) return;
+    const keys: Record<string, [number, number]> = { ArrowUp: [0,-1], w:[0,-1], ArrowDown:[0,1], s:[0,1], ArrowLeft:[-1,0], a:[-1,0], ArrowRight:[1,0], d:[1,0] };
+    const delta = keys[e.key]; if (delta) { e.preventDefault(); dispatch({ type:"move", dx:delta[0],dy:delta[1] }); }
+  }}>
+    <div className="game-heading"><span>THE INFINITE MARGIN</span><span>∞</span></div>
+    <div className="equation" aria-live="polite">{state.started ? state.round.question + " = ?" : "Shall we wander?"}</div>
+    <div className="game-board" aria-label="Seven by five game board">
+      {Array.from({length:35},(_,i)=> {
+        const choice = state.round.choices.find(c=>c.cell===i);
+        return <div key={i} className={`math-cell ${state.position===i?"is-player":""} ${choice?"has-answer":""}`} aria-label={state.position===i?"Your position, row "+(Math.floor(i/7)+1)+", column "+(i%7+1):choice?"Answer "+choice.value:undefined}>
+          {state.position===i ? <span className="walker" aria-hidden="true">✳</span> : choice ? choice.value : <i aria-hidden="true">·</i>}
+        </div>;
+      })}
     </div>
-  );
+    <p className="game-message" aria-live="polite">{state.started&&!state.running?"Paused. Your place is saved.":state.message}</p>
+    <div className="game-score"><span>SOLVED <b>{state.score}</b></span><span>MISSES <b>{state.misses}</b></span><span>BEST <b>{best}</b></span></div>
+    <div className="game-actions">
+      {!state.started ? <button onClick={start}>Start wandering ↗</button> : <>
+        <button onClick={()=>{dispatch({type:state.running?"pause":"resume"});area.current?.focus();}}>{state.running?"Pause":"Resume"}</button>
+        <button onClick={start}>New walk</button>
+      </>}
+      <div className="dpad" aria-label="Direction controls">
+        <button disabled={!state.running} onClick={()=>move(-1,0)} aria-label="Move left">←</button>
+        <button disabled={!state.running} onClick={()=>move(0,-1)} aria-label="Move up">↑</button>
+        <button disabled={!state.running} onClick={()=>move(0,1)} aria-label="Move down">↓</button>
+        <button disabled={!state.running} onClick={()=>move(1,0)} aria-label="Move right">→</button>
+      </div>
+    </div>
+    <small>ARROWS / WASD / BUTTONS · NO FINISH LINE</small>
+  </div>;
 }
