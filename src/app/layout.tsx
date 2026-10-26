@@ -1,14 +1,14 @@
-import "./../globals.css";
+import "../globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://temitayo-dev-page.vercel.app"),
-  title: "Temitayo Babarinde — Software & Systems",
+  title: "Temitayo Babarinde",
   description:
-    "Temitayo Babarinde is a Computer Science and Mathematics student at Hunter College in Queens, New York, building thoughtful software and AI products.",
+    "Temitayo Babarinde studies computer science and mathematics at Hunter College and builds software projects in Queens, New York.",
   openGraph: {
-    title: "Temitayo Babarinde — Software & Systems",
-    description: "Selected projects and notes from an independent builder in Queens, New York.",
+    title: "Temitayo Babarinde",
+    description: "Projects and notes from a Hunter College student learning by building.",
     type: "website",
   },
 };
