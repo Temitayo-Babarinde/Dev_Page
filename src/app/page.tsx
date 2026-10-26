@@ -60,8 +60,8 @@ export default function Page() {
      <header className="desk-header"><button onClick={closeBook}>← close notebook</button><span className="hand">Temitayo’s working notebook</span><a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub ↗</a></header>
      <div className={`book-shell ${opening?"book-opening":""}`}>
        <div className="paper-edges" aria-hidden="true"/>
-       <div className="book-binding" aria-hidden="true">{Array.from({length:13},(_,i)=><i key={i}/>)}</div>
-       <div className="book-pages" data-direction={direction}>
+       <div className="book-binding" hidden={page===1} aria-hidden="true">{Array.from({length:13},(_,i)=><i key={i}/>)}</div>
+       <div className="book-pages" data-direction={direction} style={page===1?{background:"radial-gradient(#88806112 .6px,transparent .9px) 0 0/4px 4px,#f8f4e7"}:undefined}>
          <div className="spread-heading"><span className="tiny">TEMITAYO / PERSONAL NOTEBOOK</span><h2 ref={title} tabIndex={-1} className="visually-hidden">{sections[page]}</h2><span className="tiny">{String(page+1).padStart(2,"0")} / 05</span></div>
          <section className="spread intro-spread" hidden={page!==0} aria-label="About me">
            <div className="paper-page welcome-page"><span className="page-kicker">01 — A QUICK INTRODUCTION</span><h3 className="hand">Hello,<br/>I’m Temitayo<span className="ink-dot">.</span></h3><p>I’m a freshman at Hunter College studying computer science and mathematics. I live in Queens, New York.</p><p>I build things to put what I’m learning into practice. Sometimes that’s a tool for classmates. Sometimes it’s an experiment or a game.</p><InkDrawing kind="laptop" className="welcome-doodle"/><span className="hand marginalia">usually a few tabs open…</span></div>
