@@ -1,13 +1,14 @@
-import "../globals.css";
+import "./../globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://temitayo-dev-page.vercel.app"),
-  title: "Jack of All Trades — Temitayo Babarinde",
-  description: "A playing-card portfolio for Temitayo Babarinde, a Computer Science and Mathematics freshman at Hunter College in New York City.",
+  title: "Temitayo Babarinde — Software & Systems",
+  description:
+    "Temitayo Babarinde is a Computer Science and Mathematics student at Hunter College in Queens, New York, building thoughtful software and AI products.",
   openGraph: {
-    title: "Jack of All Trades — Temitayo Babarinde",
-    description: "Turn a card to explore Temitayo’s skills, projects, and story.",
+    title: "Temitayo Babarinde — Software & Systems",
+    description: "Selected projects and notes from an independent builder in Queens, New York.",
     type: "website",
   },
 };
