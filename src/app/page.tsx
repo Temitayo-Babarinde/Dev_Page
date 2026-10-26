@@ -1,228 +1,173 @@
 "use client";
 
-import { useState } from "react";
-
-type CardInfo = {
-  rank: string;
-  suit: "diamonds" | "spades" | "hearts" | "clubs";
-  title: string;
-  kicker: string;
-  description: string;
-  lines: string[];
-  link?: { label: string; href: string };
-  identity?: boolean;
-};
-
-const cards: CardInfo[] = [
+const projects = [
   {
-    rank: "K",
-    suit: "spades",
-    title: "HLPR",
-    kicker: "Spades · Campus product",
-    description: "A private workspace for Hunter students to coordinate class life.",
-    lines: ["Next.js · React", "Supabase Auth · Postgres", "Course discussions · shared tasks · syllabus"],
-    link: { label: "Open the HLPR repo", href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1" },
+    number: "01",
+    name: "Strategy Lab",
+    type: "AI safety · Hackathon project",
+    description:
+      "A sandbox for checking AI-generated trading strategies for lookahead leakage, with traces that make each run easier to inspect.",
+    stack: ["Python", "Daytona", "Arize Phoenix", "Amazon Bedrock"],
+    href: "https://github.com/Temitayo-Babarinde/strategy-lab",
+    label: "View source",
+    tone: "lime",
   },
   {
-    rank: "10",
-    suit: "spades",
-    title: "Strategy Lab",
-    kicker: "Spades · Daytona HackSprint",
-    description: "An AI safety prototype that runs generated strategies in an isolated sandbox and flags lookahead leakage.",
-    lines: ["Daytona sandboxes · Arize / Phoenix traces", "Bounded repair with Amazon Bedrock", "Synthetic data · not a performance claim"],
-    link: { label: "Open the Strategy Lab repo", href: "https://github.com/Temitayo-Babarinde/strategy-lab" },
-  },
-  {
-    rank: "9",
-    suit: "spades",
-    title: "AI Startup Tracker",
-    kicker: "Spades · Research tool",
-    description: "Tracks startup activity and turns findings into concise briefs.",
-    lines: ["Startup research", "Activity briefs"],
-  },
-  {
-    rank: "8",
-    suit: "spades",
-    title: "Solar Time",
-    kicker: "Spades · Data exploration",
-    description: "An interactive exploration of daylight and seasonal change.",
-    lines: ["Daylight patterns", "Seasonal change"],
-  },
-  {
-    rank: "7",
-    suit: "spades",
-    title: "Nightmare FPS",
-    kicker: "Spades · Game project",
-    description: "An atmospheric shooter experiment focused on momentum and pacing.",
-    lines: ["Movement systems", "Collision response", "Level scripting"],
-  },
-  {
-    rank: "A",
-    suit: "diamonds",
-    title: "Programming languages",
-    kicker: "Diamonds · Programming",
-    description: "Languages I use to build software and explore ideas.",
-    lines: ["Python · C++ · Go", "JavaScript · TypeScript", "HTML · CSS"],
-  },
-  {
-    rank: "9",
-    suit: "diamonds",
-    title: "Web stack",
-    kicker: "Diamonds · Web development",
-    description: "Tools I use to build and connect web applications.",
-    lines: ["React · Next.js · Node.js", "Supabase", "PostgreSQL"],
-  },
-  {
-    rank: "8",
-    suit: "diamonds",
-    title: "Interactive tools",
-    kicker: "Diamonds · Games & design",
-    description: "Tools for prototyping mechanics and shaping visual experiences.",
-    lines: ["Godot", "Game systems", "Visual design"],
-  },
-  {
-    rank: "J",
-    suit: "clubs",
-    title: "Temitayo Babarinde",
-    kicker: "Clubs · The person behind the work",
-    description: "Freshman at Hunter College studying computer science and mathematics.",
-    lines: ["Based in Queens, New York", "Grew up in Nigeria"],
-    link: { label: "Say hello on LinkedIn", href: "https://www.linkedin.com/in/temitayo-babarinde-4198202a2" },
-    identity: true,
-  },
-  {
-    rank: "K",
-    suit: "hearts",
-    title: "About me",
-    kicker: "Hearts · Interests",
-    description: "I like building where careful systems meet visual creativity.",
-    lines: ["Backend systems · AI products", "Interactive software · game design", "Open to 2027 opportunities"],
+    number: "02",
+    name: "HLPR",
+    type: "Student product · In progress",
+    description:
+      "A shared workspace concept for Hunter students, bringing course discussions, shared tasks, and syllabus information together.",
+    stack: ["Next.js", "React", "Supabase", "PostgreSQL"],
+    href: "https://github.com/Temitayo-Babarinde/HLPR-Project-1",
+    label: "View project",
+    tone: "blue",
   },
 ];
 
-const symbols = { diamonds: "♦", spades: "♠", hearts: "♥", clubs: "♣" };
-const suitRows: { suit: CardInfo["suit"]; label: string }[] = [
-  { suit: "spades", label: "Projects" },
-  { suit: "diamonds", label: "Skills" },
-  { suit: "hearts", label: "Interests" },
-  { suit: "clubs", label: "Profile" },
+const skills = [
+  { label: "Languages", items: "Python · C++ · Go · JavaScript · TypeScript" },
+  { label: "Web", items: "React · Next.js · Node.js · HTML · CSS" },
+  { label: "Data & tools", items: "PostgreSQL · Supabase · Git · Godot" },
 ];
 
 export default function Page() {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [dismissedHoverCard, setDismissedHoverCard] = useState<number | null>(null);
-
   return (
     <main id="top">
-      <a className="skip-link" href="#hand">Skip to the cards</a>
-      <header className="topbar">
-        <a className="monogram" href="#top" aria-label="Temitayo Babarinde home">TB<span>.</span></a>
-        <p>New York <span>·</span> Hunter College</p>
+      <a className="skip-link" href="#work">Skip to selected work</a>
+
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="Temitayo Babarinde, home">
+          TB<span className="wordmark-dot">.</span>
+        </a>
+        <p className="header-location">Queens, NY <span>·</span> Hunter College</p>
         <nav aria-label="Main navigation">
-          <a href="#hand">The hand</a>
-          <a href="#contact">Contact</a>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a className="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
         </nav>
       </header>
 
-      <section className="intro" aria-labelledby="page-title">
-        <p className="eyebrow">A developer’s deck · 2026</p>
-        <h1 id="page-title">Jack of <em>all trades.</em></h1>
-        <div className="intro-bottom">
-          <p>Pick a card. My skills, projects, and the story behind them are in the hand.</p>
-          <span className="flip-hint"><i aria-hidden="true">↻</i> Hover, click, or tap to reveal</span>
-        </div>
-      </section>
-
-      <section className="card-table" id="hand" aria-label="Projects, skills, interests, and profile cards, grouped by suit.">
-        <div className="table-caption">
-          <span>THE DECK</span>
-          <span className="suit-key" aria-label="Suit guide">
-            <span><b>♦</b> Skills</span><span><b>♠</b> Projects</span><span><b>♥</b> Interests</span><span><b>♣</b> Profile</span>
-          </span>
-          <span>01 — {String(cards.length).padStart(2, "0")}</span>
-        </div>
-        <div className="suit-rows">
-          {suitRows.map(({ suit, label }) => {
-            const suitCards = cards.flatMap((card, index) => card.suit === suit ? [{ card, index }] : []);
-            return (
-              <section className={`suit-row suit-row-${suit}`} key={suit} aria-labelledby={`suit-title-${suit}`}>
-                <div className="suit-row-heading">
-                  <span aria-hidden="true">{symbols[suit]}</span>
-                  <h2 id={`suit-title-${suit}`}>{label}</h2>
-                  <small>{String(suitCards.length).padStart(2, "0")} cards</small>
-                </div>
-                <div className="cards-row">
-                  {suitCards.map(({ card, index }, suitIndex) => (
-                    <article
-                      className={`playing-card suit-${card.suit}${card.identity ? " identity-card is-open" : activeCard === index ? " is-open" : hoveredCard === index && dismissedHoverCard !== index ? " is-hovered" : ""}`}
-                      key={`${card.rank}-${card.title}`}
-                      onMouseEnter={() => setHoveredCard(index)}
-                      onMouseLeave={() => {
-                        setHoveredCard(null);
-                        if (dismissedHoverCard === index) setDismissedHoverCard(null);
-                      }}
-                    >
-                      <button
-                        className="card-back"
-                        type="button"
-                        aria-label={`${activeCard === index ? "Turn back" : "Reveal"} ${card.title}`}
-                        aria-expanded={card.identity || activeCard === index || (hoveredCard === index && dismissedHoverCard !== index)}
-                        aria-controls={`card-front-${index}`}
-                        onClick={() => setActiveCard(activeCard === index ? null : index)}
-                      >
-                        <span className="back-index">{card.rank}{symbols[card.suit]}</span>
-                        <span className="back-ornament" aria-hidden="true"><i>{symbols[card.suit]}</i></span>
-                        <span className="back-caption">TEMITAYO · 2026</span>
-                      </button>
-                      <div className="card-front" id={`card-front-${index}`}>
-                        <div className="card-corner" aria-hidden="true"><b>{card.rank}</b><span>{symbols[card.suit]}</span></div>
-                        <div className="card-copy">
-                          <p className="card-kicker">{card.kicker}</p>
-                          <h2>{card.title}</h2>
-                          {card.identity && <p className="identity-mark">JACK <span>OF ALL TRADES</span></p>}
-                          <p className="card-description">{card.description}</p>
-                          <ul>{card.lines.map((line) => <li key={line}>{line}</li>)}</ul>
-                          {card.link && <a className="card-link" href={card.link.href} target="_blank" rel="noreferrer">{card.link.label}<span aria-hidden="true">↗</span></a>}
-                        </div>
-                        {!card.identity && (
-                          <button
-                            className="card-close"
-                            type="button"
-                            aria-label={`Turn ${card.title} back over`}
-                            onClick={(event) => {
-                              setActiveCard(null);
-                              setDismissedHoverCard(index);
-                              event.currentTarget.closest(".playing-card")?.querySelector<HTMLButtonElement>(".card-back")?.focus();
-                            }}
-                          >
-                            ↶
-                          </button>
-                        )}
-                        <div className="card-foot"><span>TB</span><span>{symbols[card.suit]}</span><span>{String(suitIndex + 1).padStart(2, "0")} / {String(suitCards.length).padStart(2, "0")}</span></div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-        <p className="fan-note">The Jack stays face up. Spades hold the projects; turn each card to see what went into it.</p>
-      </section>
-
-      <section className="contact" id="contact">
-        <p className="eyebrow">Want to build something?</p>
-        <h2>Let’s play<br /><em>a good hand.</em></h2>
-        <div className="contact-row">
-          <p>Interested in software internships, hackathons, ambitious collaborators, and projects worth caring about.</p>
-          <div className="contact-links">
-            <a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-            <a href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow"><span className="status-dot" /> CS + Mathematics student · Class of 2030</p>
+          <h1 id="hero-title">I build software with a <em>systems mind</em> and a creative edge.</h1>
+          <p className="hero-description">
+            I’m Temitayo, a Hunter College student in Queens exploring useful products,
+            thoughtful engineering, and the ideas in between.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+            <a className="text-link" href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">
+              Connect on LinkedIn <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div className="hero-meta">
+            <span>Currently building</span>
+            <span className="meta-divider" />
+            <span>HLPR <span className="meta-arrow">↗</span></span>
           </div>
         </div>
-        <footer><span>© {new Date().getFullYear()} Temitayo Babarinde</span><a href="#top">Back to top ↑</a></footer>
+
+        <div className="hero-art" aria-label="Abstract geometric illustration">
+          <div className="art-grid" />
+          <div className="orbit orbit-one" />
+          <div className="orbit orbit-two" />
+          <div className="orbit-core"><span>TB</span><i>✳</i></div>
+          <span className="art-label art-label-top">BUILD / LEARN / REPEAT</span>
+          <span className="art-label art-label-side">40° 42' N<br />73° 48' W</span>
+          <span className="art-index">01—26</span>
+        </div>
+        <div className="hero-bottomline">
+          <span>Independent builder</span>
+          <span>New York City <i>✳</i></span>
+        </div>
       </section>
+
+      <section className="work-section section-wrap" id="work" aria-labelledby="work-title">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Selected work <span className="eyebrow-mark">/ 01</span></p>
+            <h2 id="work-title">Things I’m building.</h2>
+          </div>
+          <p className="section-intro">A couple of projects where product thinking meets code. Each one is a work in progress.</p>
+        </div>
+
+        <div className="project-grid">
+          {projects.map((project) => (
+            <article className={`project-card project-${project.tone}`} key={project.name}>
+              <div className="project-topline">
+                <span>{project.number} <i>—</i> {project.type}</span>
+                <span className="project-spark" aria-hidden="true">✳</span>
+              </div>
+              <div className="project-visual" aria-hidden="true">
+                {project.name === "Strategy Lab" ? (
+                  <div className="visual-strategy">
+                    <div className="visual-window">
+                      <div className="window-bar"><i /><i /><i /><span>RUN / 004</span></div>
+                      <div className="chart-lines"><span /><span /><span /><span /><b>LEAK CHECK <i>PASS</i></b></div>
+                    </div>
+                    <span className="visual-note">REPLAY<br />→ INSPECT</span>
+                  </div>
+                ) : (
+                  <div className="visual-hlpr">
+                    <div className="visual-sidebar"><b>H</b><i /><i /><i /></div>
+                    <div className="visual-board"><span>MY COURSES</span><b>CSCI 127</b><i /><i /><div><small>SHARED TASK</small><strong>Problem set 04</strong><em>IN PROGRESS</em></div></div>
+                    <span className="visual-stamp">CAMPUS<br />TOGETHER</span>
+                  </div>
+                )}
+              </div>
+              <div className="project-content">
+                <div className="project-title-row"><h3>{project.name}</h3><span className="project-status"><i /> {project.type.includes("In progress") ? "In progress" : "Prototype"}</span></div>
+                <p>{project.description}</p>
+                <ul className="tag-list" aria-label="Technologies">{project.stack.map((item) => <li key={item}>{item}</li>)}</ul>
+                <a className="project-link" href={project.href} target="_blank" rel="noreferrer">{project.label} <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="work-footnote"><span>↳</span> Strategy Lab uses synthetic data for a repeatable safety demo; it is not evidence of trading performance.</p>
+      </section>
+
+      <section className="about-section" id="about" aria-labelledby="about-title">
+        <div className="section-wrap about-layout">
+          <div className="about-heading">
+            <p className="eyebrow">A little context <span className="eyebrow-mark">/ 02</span></p>
+            <h2 id="about-title">Curious by nature.<br /><em>Builder by choice.</em></h2>
+            <p>I like the space where rigorous problem-solving meets expressive design. Right now, I’m learning the foundations and putting them to use in projects that matter to me.</p>
+            <a className="text-link" href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">More about me on LinkedIn <span aria-hidden="true">↗</span></a>
+          </div>
+          <div className="about-details">
+            <div className="detail-row"><span className="detail-index">01</span><div><h3>Study</h3><p>Computer Science & Mathematics<br />Hunter College, CUNY · 2026—2030</p></div><span className="detail-mark">⌘</span></div>
+            <div className="detail-row"><span className="detail-index">02</span><div><h3>Based</h3><p>Queens, New York<br />Grew up in Nigeria</p></div><span className="detail-mark">⌖</span></div>
+            <div className="detail-row"><span className="detail-index">03</span><div><h3>Exploring</h3><p>Backend systems, AI products,<br />interactive software, and game design</p></div><span className="detail-mark">✳</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="skills-section section-wrap" aria-labelledby="skills-title">
+        <div className="skills-heading">
+          <p className="eyebrow">Tools of the trade <span className="eyebrow-mark">/ 03</span></p>
+          <h2 id="skills-title">What I work with.</h2>
+        </div>
+        <div className="skills-list">
+          {skills.map((skill, index) => <div className="skill-row" key={skill.label}><span className="detail-index">0{index + 1}</span><h3>{skill.label}</h3><p>{skill.items}</p><span className="skill-arrow">↗</span></div>)}
+        </div>
+      </section>
+
+      <footer className="contact-section" id="contact">
+        <div className="section-wrap">
+          <p className="eyebrow">Have an interesting idea? <span className="eyebrow-mark">/ 04</span></p>
+          <div className="contact-main">
+            <h2>Let’s make<br /><em>something useful.</em></h2>
+            <div className="contact-action">
+              <p>Open to meeting thoughtful builders, exploring internships, and finding good problems to work on.</p>
+              <a className="button button-light" href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">Say hello on LinkedIn <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div className="footer-line"><span>© {new Date().getFullYear()} Temitayo Babarinde</span><span>Made in Queens, NY <i>✳</i></span><a href="#top">Back to top ↑</a></div>
+        </div>
+      </footer>
     </main>
   );
 }
