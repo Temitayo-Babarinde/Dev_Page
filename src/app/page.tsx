@@ -40,11 +40,11 @@ export default function Page() {
 
       <section className="intro" aria-labelledby="intro-title">
         <p className="eyebrow">Computer Science &amp; Mathematics · Hunter College</p>
-        <h1 id="intro-title">I’m Temitayo.<br />I’m learning by <em>building.</em></h1>
+        <h1 id="intro-title">Hi, I’m<br /><em>Temitayo.</em></h1>
         <div className="intro-bottom">
           <p className="intro-bio">
-            I study computer science and mathematics at Hunter. Outside class, I build software,
-            explore ideas, and try to understand what makes a tool useful to the people using it.
+            I study computer science and mathematics at Hunter. I like math, art, and making software.
+            Here are a couple of things I’ve worked on.
           </p>
           <p className="intro-location">Queens, New York<br />Class of 2030</p>
         </div>
@@ -52,8 +52,8 @@ export default function Page() {
 
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-topline">
-          <p className="eyebrow">A few things I’ve worked on</p>
-          <span>PROJECTS / 2026</span>
+          <p className="eyebrow">Projects</p>
+          <span>SELECTED WORK</span>
         </div>
         <h2 id="work-title" className="visually-hidden">Projects</h2>
 
@@ -85,19 +85,19 @@ export default function Page() {
 
       <section className="about-section" id="about" aria-labelledby="about-title">
         <div className="section-topline">
-          <p className="eyebrow">A little about me</p>
-          <span>ABOUT / 2026</span>
+          <p className="eyebrow">About</p>
+          <span>A LITTLE CONTEXT</span>
         </div>
         <div className="about-content">
-          <h2 id="about-title">Math, art, and programming are the things I keep coming back to.</h2>
+          <h2 id="about-title">I grew up in Nigeria and now live in Queens.</h2>
           <div className="about-copy">
             <p>
-              I’m a freshman at Hunter College in New York. I grew up in Nigeria and now live in Queens.
-              I’m early in my computer science journey, so this site is a record of what I’m learning and making.
+              I’m a freshman at Hunter College, where I study computer science and mathematics.
+              I’m still learning the fundamentals and using projects to put them into practice.
             </p>
             <p>
               I’m interested in software engineering, AI and machine learning, and interactive projects.
-              I want to keep getting better at the fundamentals while building things people can actually use.
+              I want to keep getting better at the fundamentals while building things people can use.
             </p>
           </div>
         </div>
@@ -106,20 +106,20 @@ export default function Page() {
       <section className="tools-section" aria-labelledby="tools-title">
         <div className="section-topline">
           <p className="eyebrow">Tools I’ve used</p>
-          <span>NOT A CHECKLIST</span>
+          <span>IN PROJECTS</span>
         </div>
-        <h2 id="tools-title">Still learning, still adding.</h2>
+        <h2 id="tools-title">Languages and frameworks</h2>
         <p className="tools-list">Python · C++ · Go · JavaScript · TypeScript · React · Next.js · Supabase · PostgreSQL · Godot</p>
       </section>
 
       <footer className="contact-section" id="contact">
         <div className="contact-top">
-          <p className="eyebrow">Find me elsewhere</p>
-          <span>CONTACT / 2026</span>
+          <p className="eyebrow">Links</p>
+          <span>CONTACT</span>
         </div>
-        <h2>Thanks for stopping by.</h2>
+        <h2>Get in touch.</h2>
         <div className="contact-bottom">
-          <p>If you’re working on something interesting, I’d be glad to hear about it.</p>
+          <p>If you’d like to talk about a project or opportunity, you can find me here.</p>
           <div className="contact-links">
             <a href="https://github.com/Temitayo-Babarinde" target="_blank" rel="noreferrer">GitHub ↗</a>
             <a href="https://www.linkedin.com/in/temitayo-babarinde-4198202a2" target="_blank" rel="noreferrer">LinkedIn ↗</a>
