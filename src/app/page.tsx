@@ -38,11 +38,11 @@ export default function Page() {
  function closeBook() { setOpened(false);setOpening(false);if(timeout.current)clearTimeout(timeout.current); requestAnimationFrame(()=>openButton.current?.focus()); }
  return <main className={`notebook-world ${opened?"is-open":""}`}>
    <section className="front-scene" hidden={opened} aria-label="Introduction">
-     <header className="front-header"><span className="ink-signature">tb.</span><span className="tiny">TEMITAYO BABARINDE</span><span className="prototype-label">prototype / portrait pending</span></header>
+     <header className="front-header"><span className="ink-signature">tb.</span><span className="tiny">TEMITAYO BABARINDE</span><span className="prototype-label">a work in progress</span></header>
      <div className="margin-maths" aria-hidden="true"><span>∑</span><span>f(x)</span><span>01</span><span>∞</span><span>{"{ }"}</span><span>π</span><span>√</span></div>
      <div className="front-composition">
        <div className="name-note"><span className="hand small-note">a few pages from</span><h1>Temitayo<br/><span>Babarinde.</span></h1><p>CS &amp; mathematics at Hunter.<br/>Code, curiosity, and a pencil nearby.</p><div className="sketched-arrow" aria-hidden="true">⤵</div></div>
-       <figure className="portrait-study"><InkDrawing kind="portrait"/><figcaption className="hand">portrait study — your photo goes here</figcaption></figure>
+       <figure className="portrait-study"><img src="/portrait.svg" alt="Line-art portrait of Temitayo Babarinde" width={1262} height={1246} style={{width:"100%",height:"auto"}}/></figure>
        <div className="thought-note"><span className="tiny">A NOTE FROM THE MARGINS</span><p className="hand">Oh, hello.<br/>Come have a look around.</p><svg viewBox="0 0 100 60" aria-hidden="true"><path d="M95 3 Q32 -8 16 45 M9 33 L15 49 L33 43" fill="none" stroke="currentColor" strokeWidth="2"/></svg></div>
        <button ref={openButton} className="little-book" onClick={()=>openBook()} aria-label="Open my notebook">
          <span className="mini-spine" aria-hidden="true"/>
